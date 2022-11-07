@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +19,6 @@ Route::get('/', function () {
 })->name('main');
 
 Route::prefix('file')->group(function () {
-    Route::get('/', function () {
-        return view('file.main');
-    })->name('file_main');
-    Route::get('/edit', function () {
-        return view('file.edit');
-    })->name('file_edit');
+    Route::get('/', [FileController::class, 'Main'])->name('file_main');
+    Route::get('/edit', [FileController::class, 'Edit'])->name('file_edit');
 });

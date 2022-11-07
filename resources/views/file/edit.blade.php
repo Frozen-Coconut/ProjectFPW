@@ -1,8 +1,8 @@
 @extends('layout.main')
 
 @section('head')
-<link href="/css/jquery-linedtextarea.css" type="text/css" rel="stylesheet" />
-<script src="/js/jquery-linedtextarea.js"></script>
+<link href="{{asset('css/jquery-linedtextarea.css')}}" type="text/css" rel="stylesheet" />
+<script src="{{asset('js/jquery-linedtextarea.js')}}"></script>
 @endsection
 
 @section('content')
