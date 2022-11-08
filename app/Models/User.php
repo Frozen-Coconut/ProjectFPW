@@ -9,14 +9,16 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_user';
-
-    public $timestamps = false;
+    protected $table = "users";
+    protected $primary_key = "id";
+    protected $increment = true;
+    protected $timestamps = false;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'occupational_status'
+        "name",
+        "email",
+        "email_verified_at",
+        "password",
+        "occupational_status"
     ];
 }
