@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('id_project');
+            $table->string('name_project', 256);
+            $table->string('inivitation_code', 256);
+            $table->integer('status');
         });
     }
 
