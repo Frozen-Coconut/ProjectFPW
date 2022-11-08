@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('to_dos', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->foreignId('project_id')->references('id')->on('projects');
+            $table->datetime('deadline');
+            $table->string('tag')->nullable();
             $table->timestamps();
         });
     }

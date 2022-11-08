@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('h_transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('transaction_id')->unique();
+            $table->foreignId('project_id')->references('id')->on('projects');
+            $table->bigInteger('amount');
+            $table->integer('transaction_method');
+            $table->integer('status');
             $table->timestamps();
         });
     }

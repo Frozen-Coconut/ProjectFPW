@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id('id_project');
+            $table->id();
             $table->string('name_project', 256);
             $table->string('inivitation_code', 256);
+            $table->foreignId('project_manager_id')->references('id')->on('users');
             $table->integer('status');
+            $table->timestamps();
         });
     }
 

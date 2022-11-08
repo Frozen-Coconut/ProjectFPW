@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('to_do_comments', function (Blueprint $table) {
+        Schema::create('to_do_assign_to', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('to_do_id')->references('id')->on('to_dos');
-            $table->string('contents');
+            $table->integer('weights');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('to_do_comments');
+        Schema::dropIfExists('to_do_assign_to');
     }
 };
