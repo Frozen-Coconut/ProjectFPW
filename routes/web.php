@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-})->name('main');
+Route::prefix('user')->group(function () {
+    Route::get('/', [UserController::class, 'Home'])->name('user_home');
+});
 
 Route::prefix('file')->group(function () {
     Route::get('/', [FileController::class, 'Main'])->name('file_main');

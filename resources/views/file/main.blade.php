@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('content')
+@section('body')
 <div class="container w-screen min-h-screen px-4 py-20 relative">
     <table class="table-auto w-full border-2 rounded text-center">
         <thead>

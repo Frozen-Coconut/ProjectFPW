@@ -5,7 +5,7 @@
 <script src="{{asset('js/jquery-linedtextarea.js')}}"></script>
 @endsection
 
-@section('content')
+@section('body')
 <div class="container w-screen min-h-screen px-4 py-20 relative">
     <textarea id="text" rows="24" class="w-full">Ini adalah contoh text...</textarea>
 
