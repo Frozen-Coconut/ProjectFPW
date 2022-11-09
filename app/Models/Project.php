@@ -22,4 +22,24 @@ class Project extends Model
         "created_at",
         "updated_at"
     ];
+
+    public function users() {
+        return $this->belongsToMany(Project::class, 'users_projects', 'project_id', 'user_id', 'id', 'id');
+    }
+
+    public function managed() {
+        return $this->belongsTo(User::class, 'project_manager_id', 'id');
+    }
+
+    public function to_dos() {
+        return $this->hasMany(ToDo::class,'project_id','id');
+    }
+
+    public function h_trans() {
+        return $this->hasMany(HTransaction::class,'project_id','id');
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class,'project_id','id');
+    }
 }

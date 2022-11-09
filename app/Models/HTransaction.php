@@ -23,4 +23,8 @@ class HTransaction extends Model
         "created_at",
         "updated_at"
     ];
+
+    public function project() {
+        return $this->belongsTo(Project::class,'project_id','id');
+    }
 }

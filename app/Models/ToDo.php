@@ -22,4 +22,16 @@ class ToDo extends Model
         "created_at",
         "updated_at"
     ];
+
+    public function project() {
+        return $this->belongsTo(Project::class, 'project_id', 'id');
+    }
+
+    public function to_do_comments() {
+        return $this->hasMany(ToDoComment::class, 'to_do_id', 'id');
+    }
+
+    public function users() {
+        return $this->belongsToMany(ToDo::class,'to_do_assign_to','to_do_id','user_id','id','id');
+    }
 }
