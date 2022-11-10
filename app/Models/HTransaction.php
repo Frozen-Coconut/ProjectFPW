@@ -10,9 +10,9 @@ class HTransaction extends Model
     use HasFactory;
 
     protected $table = "h_transactions";
-    protected $primary_key = "id";
-    protected $increment = true;
-    protected $timestamps = true;
+    protected $primaryKey = "id";
+    public $incrementing = true;
+    public $timestamps = true;
 
     protected $fillable = [
         "transaction_id",

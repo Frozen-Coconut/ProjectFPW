@@ -10,9 +10,9 @@ class ToDoComment extends Model
     use HasFactory;
 
     protected $table = "to_do_comments";
-    protected $primary_key = "id";
-    protected $increment = true;
-    protected $timestamps = true;
+    protected $primaryKey = "id";
+    public $incrementing = true;
+    public $timestamps = true;
 
     protected $fillable = [
         "user_id",

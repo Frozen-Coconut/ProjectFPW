@@ -10,9 +10,9 @@ class ToDo extends Model
     use HasFactory;
 
     protected $table = "to_dos";
-    protected $primary_key = "id";
-    protected $increment = true;
-    protected $timestamps = true;
+    protected $primaryKey = "id";
+    public $incrementing = true;
+    public $timestamps = true;
 
     protected $fillable = [
         "name",

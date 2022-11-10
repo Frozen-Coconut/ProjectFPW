@@ -10,9 +10,9 @@ class PostComment extends Model
     use HasFactory;
 
     protected $table = "post_comments";
-    protected $primary_key = "id";
-    protected $increment = true;
-    protected $timestamps = true;
+    protected $primaryKey = "id";
+    public $incrementing = true;
+    public $timestamps = true;
 
     protected $fillable = [
         "user_id",

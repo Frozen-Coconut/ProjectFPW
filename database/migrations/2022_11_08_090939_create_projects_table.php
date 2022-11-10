@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name_project', 256);
-            $table->string('inivitation_code', 256);
+            $table->string('invitation_code', 256);
             $table->foreignId('project_manager_id')->references('id')->on('users');
             $table->integer('status');
             $table->timestamps();
