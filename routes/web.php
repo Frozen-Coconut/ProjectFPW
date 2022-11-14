@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasicController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::prefix('/')->group(function () {
+    Route::get('/', [BasicController::class, 'Login'])->name('login');
+    Route::post('/', [BasicController::class, 'LoginPost'])->name('login_post');
+});
 
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'Home'])->name('user_home');
