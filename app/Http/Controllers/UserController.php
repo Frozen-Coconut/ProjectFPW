@@ -10,4 +10,9 @@ class UserController extends Controller
     {
         return view('user.home');
     }
+
+    public function Project(Request $request)
+    {
+        return view('user.project');
+    }
 }

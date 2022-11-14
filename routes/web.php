@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'Home'])->name('user_home');
+    Route::get('/project', [UserController::class, 'Project'])->name('user_project');
 });
 
 Route::prefix('file')->group(function () {
