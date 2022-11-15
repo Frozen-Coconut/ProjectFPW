@@ -23,4 +23,9 @@ class BasicController extends Controller
         }
         return redirect()->route('login');
     }
+
+    public function Logout(Request $request) {
+        session()->forget('now');
+        return redirect()->route('login');
+    }
 }

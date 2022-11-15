@@ -19,11 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/')->group(function () {
     Route::get('/', [BasicController::class, 'Login'])->name('login');
     Route::post('/', [BasicController::class, 'LoginPost'])->name('login_post');
+    Route::get('/logout', [BasicController::class, 'Logout'])->name('logout');
 });
 
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'Home'])->name('user_home');
     Route::get('/project', [UserController::class, 'Project'])->name('user_project');
+    Route::get('/add', [UserController::class, 'AddProject'])->name('user_add_project');
+    Route::post('/add', [UserController::class, 'AddProject'])->name('user_add_project_post');
 });
 
 Route::prefix('file')->group(function () {

@@ -17,4 +17,9 @@ class UserController extends Controller
     {
         return view('user.project');
     }
+
+    public function AddProject(Request $request)
+    {
+        return view('user.add_project');
+    }
 }
