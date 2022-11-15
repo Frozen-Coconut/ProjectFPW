@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email', 40)->unique();
             $table->dateTime('email_verified_at')->nullable();
             $table->string('password', 256);
-            $table->integer('occupational_status');
+            $table->integer('occupational_status')->default(0)->comment('0 = pelajar, 1 = mahasiswa, 2 = pekerja, 3 = yang lainnya');
         });
     }
 
