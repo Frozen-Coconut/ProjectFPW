@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('project_id')->references('id')->on('projects');
             $table->bigInteger('amount');
             $table->integer('transaction_method');
-            $table->integer('status');
+            $table->integer('status')->default(0)->comment('0 = pembayaran sedang dalam proses, 1 = pembayaran berhasil, 2 = pembayaran gagal');
             $table->timestamps();
         });
     }

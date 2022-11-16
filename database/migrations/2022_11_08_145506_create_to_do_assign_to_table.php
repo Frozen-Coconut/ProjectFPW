@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('to_do_id')->references('id')->on('to_dos');
-            $table->integer('weights');
+            $table->integer('weights')->default(1);
             $table->timestamps();
         });
     }
