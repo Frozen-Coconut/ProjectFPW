@@ -6,13 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
     public function indexLogin(Request $request)
     {
-
+        return view('login');
     }
 
     public function doLogin(Request $request)
@@ -24,19 +23,16 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-        }
-        else {
-            //Kasi pesan ga ketemu
+        } else {
+            return redirect()->route('login');
         }
 
-        //Cara ngambilnya getUser();
-        //Pindahin ke mana ?
-
+        return redirect()->route('user_home');
     }
 
     public function indexRegister(Request $request)
     {
-
+        return view('register');
     }
 
     public function doRegister(Request $request)
@@ -45,9 +41,17 @@ class AuthController extends Controller
             "email" => 'required|required|unique:users,email',
             "name" => 'required',
             "password" => 'required|confirmed',
+            "password_confirmation" => 'required',
             "occupational_status" => 'required'
         ]);
 
-        User::create($request);
+        User::create($request->all());
+
+        return redirect()->route('register');
+    }
+
+    public function doLogout(Request $request) {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

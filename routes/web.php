@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BasicController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/')->group(function () {
-    Route::get('/', [BasicController::class, 'Login'])->name('login');
-    Route::post('/', [BasicController::class, 'LoginPost'])->name('login_post');
-    Route::get('/logout', [BasicController::class, 'Logout'])->name('logout');
+    Route::get('/', [AuthController::class, 'indexLogin'])->name('login');
+    Route::post('/', [AuthController::class, 'doLogin'])->name('doLogin');
+    Route::get('/register', [AuthController::class, 'indexRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'doRegister'])->name('doRegister');
+    Route::get('/logout', [AuthController::class, 'doLogout'])->name('logout');
 });
 
 Route::prefix('user')->group(function () {
