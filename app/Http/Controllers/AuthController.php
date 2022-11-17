@@ -21,7 +21,12 @@ class AuthController extends Controller
             "password" => 'required'
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        $credential = [
+            "email" => $request->email,
+            "password" => $request->password
+        ];
+
+        if (Auth::attempt($credential)) {
             $request->session()->regenerate();
         } else {
             return redirect()->route('login');
@@ -44,8 +49,12 @@ class AuthController extends Controller
             "password_confirmation" => 'required',
             "occupational_status" => 'required'
         ]);
-
-        User::create($request->all());
+        User::create([
+            "email" => $request->email,
+            "name" => $request->name,
+            "password" => bcrypt($request->password),
+            "occupational_status" => $request->occupational_status
+        ]);
 
         return redirect()->route('register');
     }
