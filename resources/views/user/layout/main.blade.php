@@ -2,6 +2,7 @@
 
 @section('head')
 <link rel="stylesheet" href="{{asset('css/user-sidebar.css')}}">
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
 @endsection
 
 @section('body')

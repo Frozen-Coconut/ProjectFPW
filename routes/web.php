@@ -29,6 +29,7 @@ Route::prefix('user')->group(function () {
     Route::get('/project', [UserController::class, 'Project'])->name('user_project');
     Route::get('/add', [UserController::class, 'AddProject'])->name('user_add_project');
     Route::post('/add', [UserController::class, 'AddProject'])->name('user_add_project_post');
+    Route::get('/kalender', [UserController::class, 'Kalender'])->name('user_kalender');
 });
 
 Route::prefix('file')->group(function () {
