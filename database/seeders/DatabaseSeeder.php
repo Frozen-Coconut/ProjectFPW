@@ -23,5 +23,31 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'name' => "User $i",
+                'email' => "user$i@example.com",
+                'password' => bcrypt("user$i"),
+                'occupational_status' => random_int(0, 3)
+            ]);
+        }
+
+        for ($i = 1; $i <= 10; $i++) {
+            Project::create([
+                'name_project' => "Project $i",
+                'invitation_code' => "project$i",
+                'project_manager_id' => $i
+            ]);
+        }
+
+        for ($i = 1; $i <= 10; $i++) {
+            User::find($i)->projects()->attach($i, [
+                'user_id' => $i,
+                'project_id' => $i,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
     }
 }
