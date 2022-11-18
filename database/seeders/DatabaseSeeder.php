@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         }
 
         for ($i = 1; $i <= 10; $i++) {
-            User::find($i)->projects()->attach($i, [
+            User::find($i)->projects()->attach(0, [
                 'user_id' => $i,
                 'project_id' => $i,
                 'created_at' => now(),

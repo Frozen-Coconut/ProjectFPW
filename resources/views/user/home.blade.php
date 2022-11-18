@@ -8,7 +8,7 @@
 @endif
     @foreach ($user->projects as $project)
     <div class="flex justify-center">
-        <div class="block p-6 rounded-lg shadow-lg bg-white w-full max-h-44">
+        <div class="block p-6 rounded-lg shadow-lg bg-white w-full max-h-44 border">
           <h5 class="text-gray-900 text-xl leading-tight font-medium mb-3">{{$project->name_project}}</h5>
           {{-- <p class="text-gray-700 text-base mb-4">
             Ini adalah contoh deskripsi project...

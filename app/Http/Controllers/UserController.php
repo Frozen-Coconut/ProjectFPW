@@ -6,6 +6,8 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Project;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -23,6 +25,54 @@ class UserController extends Controller
     public function AddProject(Request $request)
     {
         return view('user.add_project');
+    }
+
+    public function AddProjectPost(Request $request)
+    {
+        if ($request->has('create')) {
+            $request->validate([
+                'name_project' => 'required',
+                'invitation_code_1' => 'required | unique:projects,invitation_code'
+            ], [
+                '*.required' => ':attribute harus diisi!',
+                'invitation_code_1.unique' => ':attribute tidak tersedia!'
+            ], [
+                'name_project' => 'Nama project',
+                'invitation_code_1' => 'Kode invitasi'
+            ]);
+            $project = Project::create([
+                'name_project' => $request->name_project,
+                'invitation_code' => $request->invitation_code_1,
+                'project_manager_id' => getUser()->id
+            ]);
+            $user = getUser();
+            User::find($user->id)->projects()->attach(0, [
+                'user_id' => $user->id,
+                'project_id' => $project->id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        } else if ($request->has('join')) {
+            $request->validate([
+                'invitation_code_2' => 'required | exists:projects,invitation_code'
+            ], [
+                '*.required' => ':attribute harus diisi!',
+                'invitation_code_2.exists' => ':attribute tidak ditemukan!'
+            ], [
+                'invitation_code_2' => 'Kode invitasi'
+            ]);
+            $project = Project::where('invitation_code', $request->invitation_code_2)->first();
+            $user = getUser();
+            if (true) { // JANGAN LUPA KASIH PENGECEKAN KALAU USER SUDAH PERNAH JOIN PROJECT
+                User::find($user->id)->projects()->attach(0, [
+                    'user_id' => $user->id,
+                    'project_id' => $project->id,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        }
+        return redirect()->route('user_home');
     }
 
     public function IndexKalender(Request $request) {
