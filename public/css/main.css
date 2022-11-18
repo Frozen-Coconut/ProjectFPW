@@ -2,8 +2,8 @@
     display: flex;
     justify-content:flex-end;
     align-items:flex-start;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 5px;
     background-color: lightsteelblue;
     border: 2px;
@@ -17,8 +17,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 5px;
     border: 2px;
     margin-left: 5px;
@@ -34,9 +34,18 @@
 .head-kalender {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .row-kalender {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+}
+
+.detail-kalender {
+    border-radius: 5px;
+    background-color: lightsteelblue;
+    width: 90%;
+    height: 100%;
 }
