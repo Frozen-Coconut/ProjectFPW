@@ -6,7 +6,7 @@
 
 @section('body')
 <div class="min-h-screen bg-gray-50 flex">
-    @include('user.util.sidebar_project')
+    @include('project.util.sidebar_project')
     <div class="w-full h-screen">
         @yield('content')
     </div>

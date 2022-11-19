@@ -7,7 +7,11 @@
         </div>
         <ul class="mt-6 space-y-2 tracking-wide">
           <li class="min-w-max">
-            <a href="#" aria-label="dashboard" class="relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white">
+            @if (route('project_home') == url()->current())
+            <a href="{{route('project_home')}}" aria-label="dashboard" class="relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white">
+            @else
+            <a href="{{route('project_home')}}" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">
+            @endif
               <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                 <path d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z" class="fill-current text-cyan-400 dark:fill-slate-600"></path>
                 <path d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z" class="fill-current text-cyan-200 group-hover:text-cyan-300"></path>
@@ -26,7 +30,11 @@
             </a>
           </li>
           <li class="min-w-max">
-            <a href="#" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">
+            @if (route('project_daftar_tugas') == url()->current())
+            <a href="{{route('project_daftar_tugas')}}" aria-label="dashboard" class="relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white">
+            @else
+            <a href="{{route('project_daftar_tugas')}}" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">
+            @endif
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path class="fill-current text-gray-600 group-hover:text-cyan-600" d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
                 <path class="fill-current text-gray-300 group-hover:text-cyan-300" d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
