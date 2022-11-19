@@ -63,13 +63,16 @@ class UserController extends Controller
             ]);
             $project = Project::where('invitation_code', $request->invitation_code_2)->first();
             $user = getUser();
-            if (true) { // JANGAN LUPA KASIH PENGECEKAN KALAU USER SUDAH PERNAH JOIN PROJECT
+            $projects = User::find($user->id)->projects();
+            if (!$projects->where('project_id', $project->id)->exists()) {
                 User::find($user->id)->projects()->attach(0, [
                     'user_id' => $user->id,
                     'project_id' => $project->id,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);
+            } else {
+                return redirect()->route('user_add_project')->with('message_error', 'User sudah tergabung dalam project tersebut!');
             }
         }
         return redirect()->route('user_home');

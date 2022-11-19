@@ -27,10 +27,10 @@
     @enderror
     <label for="occupational_status">Pekerjaan</label><br>
     <select name="occupational_status" id="occupational_status">
-        <option value="0">Pelajar</option>
-        <option value="1">Mahasiswa</option>
-        <option value="2">Pekerja</option>
-        <option value="3">Yang lainnya</option>
+        <option value="0" {{old('occupational_status') == '0' ? 'selected' : ''}}>Pelajar</option>
+        <option value="1" {{old('occupational_status') == '1' ? 'selected' : ''}}>Mahasiswa</option>
+        <option value="2" {{old('occupational_status') == '2' ? 'selected' : ''}}>Pekerja</option>
+        <option value="3" {{old('occupational_status') == '3' ? 'selected' : ''}}>Yang lainnya</option>
     </select><br>
     @error('occupational_status')
         <p class="text-red-500">{{$message}}</p>
