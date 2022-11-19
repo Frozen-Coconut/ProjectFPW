@@ -29,7 +29,7 @@ class AuthController extends Controller
         if (Auth::attempt($credential)) {
             return redirect()->route('user_home');
         } else {
-            return redirect()->route('login');
+            return redirect()->route('login')->with('message_error', 'Password salah!');
         }
     }
 
@@ -54,7 +54,7 @@ class AuthController extends Controller
             "occupational_status" => $request->occupational_status
         ]);
 
-        return redirect()->route('register');
+        return redirect()->route('login');
     }
 
     public function doLogout(Request $request) {
