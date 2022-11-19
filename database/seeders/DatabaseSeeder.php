@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Post;
 use App\Models\Project;
+use App\Models\ToDo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -24,7 +26,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        for ($i = 1; $i <= 10; $i++) {
+        // how many?
+        $n = 10;
+
+        // users
+        for ($i = 1; $i <= $n; $i++) {
             User::create([
                 'name' => "User $i",
                 'email' => "user$i@example.com",
@@ -33,7 +39,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        for ($i = 1; $i <= 10; $i++) {
+        // projects
+        for ($i = 1; $i <= $n; $i++) {
             Project::create([
                 'name_project' => "Project $i",
                 'invitation_code' => "project$i",
@@ -41,12 +48,44 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        for ($i = 1; $i <= 10; $i++) {
+        // users_projects
+        for ($i = 1; $i <= $n; $i++) {
             User::find($i)->projects()->attach(0, [
                 'user_id' => $i,
                 'project_id' => $i,
                 'created_at' => now(),
                 'updated_at' => now()
+            ]);
+            User::find($i)->projects()->attach(0, [
+                'user_id' => $i,
+                'project_id' => $n + 1 - $i,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
+
+        // to_dos
+        for ($i = 1; $i <= $n; $i++) {
+            for ($j = 1; $j <= 5; $j++) {
+                ToDo::create([
+                    'name' => "To Do $j",
+                    'project_id' => $i,
+                    'deadline' => date_add(now(), date_interval_create_from_date_string("7 days"))
+                ]);
+            }
+        }
+
+        // posts
+        for ($i = 1; $i <= $n; $i++) {
+            Post::create([
+                'project_id' => $i,
+                'user_id' => $i,
+                'contents' => "Ini post dari User $i"
+            ]);
+            Post::create([
+                'project_id' => $i,
+                'user_id' => $n + 1 - $i,
+                'contents' => 'Ini post dari User ' . ($n + 1 - $i)
             ]);
         }
     }
