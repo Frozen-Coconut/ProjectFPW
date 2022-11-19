@@ -29,7 +29,9 @@
             </div>
         </div>
         <div class="h-full p-10 pl-20" style="width: 50%">
-            <div class="detail-kalender"></div>
+            <div class="detail-kalender p-5 mb-5" id="layout-detail-kalender">
+
+            </div>
         </div>
     </div>
 @endsection

@@ -23,7 +23,7 @@ class User extends Authenticatable
     ];
 
     public function to_dos() {
-        return $this->belongsToMany(ToDo::class,'to_do_assign_to','user_id','to_do_id','id','id');
+        return $this->belongsToMany(ToDo::class,'to_do_assign_to','user_id','to_do_id','id','id')->withPivot('weights', 'status');
     }
 
     public function manages() {

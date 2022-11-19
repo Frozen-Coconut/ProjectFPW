@@ -98,11 +98,18 @@ class UserController extends Controller
         $start = (($tgl_terakhir_bulan_lalu-$hari_awal_bulan_ini)+1)%$tgl_terakhir_bulan_lalu;
         if ($start == 0 ) $start = $tgl_terakhir_bulan_lalu;
         $daftar_hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+
+        $tanggal_deadline = [];
+        foreach (getUser()->to_dos as $key => $value) {
+            $tanggal_deadline[date("d",strtotime($value->deadline))] = 1;
+        }
+
         return view('user.ajax-layout.layout-kalender',[
             "start" => $start,
             "tgl_terakhir_bulan_ini" => $tgl_terakhir_bulan_ini,
             "tgl_terakhir_bulan_lalu" => $tgl_terakhir_bulan_lalu,
-            "daftar_hari" => $daftar_hari
+            "daftar_hari" => $daftar_hari,
+            "tanggal_deadline" => $tanggal_deadline
         ]);
     }
 
@@ -145,5 +152,14 @@ class UserController extends Controller
         $temp = $temp%7;
 
         return ($this->findFirstDay($year)+$temp)%7;
+    }
+
+    public function DetailKalender(Request $request) {
+        $date = $request->year.'-'.($request->month+1).'-'.$request->day;
+        $daftar_tugas = getUser()->to_dos()->where('deadline','=',$date)->get();
+
+        return view('user.ajax-layout.layout-detail-kalender',[
+            "daftar_tugas" => $daftar_tugas
+        ]);
     }
 }

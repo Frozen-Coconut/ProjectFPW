@@ -32,6 +32,6 @@ class ToDo extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(ToDo::class,'to_do_assign_to','to_do_id','user_id','id','id');
+        return $this->belongsToMany(ToDo::class,'to_do_assign_to','to_do_id','user_id','id','id')->withPivot('weights', 'status');;
     }
 }

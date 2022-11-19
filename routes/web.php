@@ -33,6 +33,7 @@ Route::prefix('user')->group(function () {
     Route::post('/add', [UserController::class, 'AddProjectPost'])->name('user_add_project_post');
     Route::get('/kalender', [UserController::class, 'IndexKalender'])->name('user_kalender');
     Route::get('/ajax-kalender', [UserController::class, 'Kalender']);
+    Route::get('/ajax-detail-kalender', [UserController::class, 'DetailKalender']);
 });
 
 Route::prefix('project')->group(function () {

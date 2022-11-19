@@ -21,7 +21,15 @@
         @for ($j = 0; $j < 6; $j++)
             <div class="row-kalender">
                 @for ($i = 0; $i < 7; $i++)
-                    <div class="kotak-kalender @if($mode == 0) kalender-lain @endif">
+                    <div class="kotak-kalender
+                    @if($mode == 0)
+                        kalender-lain
+                    @elseif(array_key_exists($start,$tanggal_deadline) && ($mode == 1))
+                        ada-deadline
+                    @endif"
+                    @if($mode == 1 && array_key_exists($start,$tanggal_deadline))
+                        onclick="loadDaftarTugas({{$start}})"
+                    @endif>
                         {{$start}}
                     </div>
 

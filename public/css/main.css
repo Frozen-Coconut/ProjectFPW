@@ -31,6 +31,10 @@
     color: lightslategray;
 }
 
+.ada-deadline {
+    background-color: lightcoral;
+}
+
 .head-kalender {
     display: flex;
     flex-direction: column;

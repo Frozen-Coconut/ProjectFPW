@@ -71,3 +71,17 @@ function loadKalender() {
         $("#layout-kalender").html(res);
     })
 }
+
+function loadDaftarTugas(day) {
+    $.ajax({
+        type:"get",
+        url:"/user/ajax-detail-kalender",
+        data: {
+            "month" : $("#month-now").val(),
+            "year" : $("#year-now").val(),
+            "day" : day
+        }
+    }).then(res => {
+        $("#layout-detail-kalender").html(res)
+    })
+}
