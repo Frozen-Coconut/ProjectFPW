@@ -53,7 +53,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="name_project">
                 Tugas
             </label>
-            <select name="tugas" id="" class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <select name="tugas" id="" class="bg-gray-50 w-full border border-gray-300 text-gray-700 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="-1" selected hidden>Tugas yang ingin dipilih</option>
                 @foreach ($project_sekarang->to_dos as $item)
                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -67,7 +67,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="invitation_code_1">
                 Pengguna
             </label>
-            <select name="user" id="" class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <select name="user" id="" class="bg-gray-50 w-full border border-gray-300 text-gray-700 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="-1" selected hidden>Orang yang ingin ditugaskan</option>
                 @foreach ($project_sekarang->users as $item)
                 <option value="{{$item->id}}">{{$item->name}}</option>

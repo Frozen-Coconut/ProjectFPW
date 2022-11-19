@@ -30,7 +30,7 @@
             </a>
           </li>
           <li class="min-w-max">
-            @if (route('project_daftar_tugas') == url()->current())
+            @if (route('project_daftar_tugas') == url()->current() || route('project_add_tugas') == url()->current())
             <a href="{{route('project_daftar_tugas')}}" aria-label="dashboard" class="relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white">
             @else
             <a href="{{route('project_daftar_tugas')}}" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">

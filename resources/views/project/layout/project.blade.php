@@ -2,6 +2,9 @@
 
 @section('head')
 <link rel="stylesheet" href="{{asset('css/user-sidebar.css')}}">
+
+@yield('js')
+
 @endsection
 
 @section('body')

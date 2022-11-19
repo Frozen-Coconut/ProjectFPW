@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="h-full p-10 pl-20" style="width: 50%">
-            <div class="detail-kalender p-5 mb-5" id="layout-detail-kalender">
+            <div class="detail-kalender p-5 mb-5 overflow-y-auto" id="layout-detail-kalender">
 
             </div>
         </div>

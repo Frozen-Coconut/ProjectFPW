@@ -38,7 +38,8 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('project')->group(function () {
     Route::get('/', [ProjectController::class, 'Project'])->name('project_home');
-    Route::get('/daftar-tugas', [ProjectController::class, 'DaftarTugas'])->name('project_daftar_tugas');
+    Route::get('/daftar-tugas', [ProjectController::class, 'IndexDaftarTugas'])->name('project_daftar_tugas');
+    Route::get('/ajax-daftar-tugas', [ProjectController::class, 'DaftarTugas']);
     Route::get('/add', [ProjectController::class, 'AddDaftarTugas'])->name('project_add_tugas');
     Route::post('/add', [ToDoController::class, 'CreateToDo'])->name('project_add_tugas_post');
     Route::post('/assign', [ToDoController::class, 'AssignToDo'])->name('project_assign_tugas_post');
