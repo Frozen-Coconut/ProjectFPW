@@ -43,6 +43,9 @@ Route::prefix('project')->group(function () {
     Route::get('/add', [ProjectController::class, 'AddDaftarTugas'])->name('project_add_tugas');
     Route::post('/add', [ToDoController::class, 'CreateToDo'])->name('project_add_tugas_post');
     Route::post('/assign', [ToDoController::class, 'AssignToDo'])->name('project_assign_tugas_post');
+    Route::get('/kalender', [ProjectController::class, 'IndexKalender'])->name('project_kalender');
+    Route::get('/ajax-kalender', [ProjectController::class, 'Kalender']);
+    Route::get('/ajax-detail-kalender', [ProjectController::class, 'DetailKalender']);
 });
 
 Route::prefix('file')->group(function () {

@@ -1,5 +1,5 @@
 @foreach ($daftar_tugas as $value)
-    <div class="w-full flex flex-row justify-start px-10 items-center" style="">
+    <div class="w-full mb-4 flex flex-row justify-start px-10 items-center border border-gray-500 rounded-lg p-3" style="">
         <div style="width: 2%;" class="mr-3 flex justify-start items-center">
             <svg class="w-full h-full @if ($value->pivot->status != 1)
                 text-blue-500
