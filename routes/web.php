@@ -38,6 +38,7 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('project')->group(function () {
     Route::get('/', [ProjectController::class, 'Project'])->name('project_home');
+    Route::post('/post/add', [ProjectController::class, 'AddPost'])->name('project_add_post');
 
     //Daftar Tugas
     Route::get('/daftar-tugas', [ProjectController::class, 'IndexDaftarTugas'])->name('project_daftar_tugas');

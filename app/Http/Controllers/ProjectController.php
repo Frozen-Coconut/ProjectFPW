@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\ToDo;
 use Illuminate\Support\Facades\Session;
 
@@ -20,6 +21,19 @@ class ProjectController extends Controller
     {
         $project = Project::find(session('projectSekarang'));
         return view('project.project', compact('project'));
+    }
+
+    public function AddPost(Request $request)
+    {
+        $request->validate([
+            'post' => 'required'
+        ]);
+        Post::create([
+            'project_id' => session('projectSekarang'),
+            'user_id' => getUser()->id,
+            'contents' => $request->post
+        ]);
+        return redirect()->route('project_home');
     }
 
     public function IndexDaftarTugas(Request $request)
