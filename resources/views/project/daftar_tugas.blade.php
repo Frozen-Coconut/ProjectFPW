@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="flex justify-end mb-8">
-        <button class="inline-block px-6 mr-3 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Urutkan</button>
+        <button onclick="ubahModeSort()" id="save_sort" class="inline-block px-6 mr-3 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Urutkan</button>
         <select onchange="sortUbah()" name="sort" id="sort" class="bg-gray-50 border border-gray-300 w-60 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="-1" selected hidden>Urutkan berdasarkan</option>
             <option value="0">Berdasarkan Nama (Desc)</option>
