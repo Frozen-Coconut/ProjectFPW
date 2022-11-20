@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ToDo;
 use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
@@ -22,7 +23,10 @@ class ProjectController extends Controller
 
     public function IndexDaftarTugas(Request $request)
     {
-        return view('project.daftar_tugas');
+        return view('project.daftar_tugas',[
+            "user" => getUser(),
+            "project" => Project::where('id','=',Session::get('projectSekarang'))->first()
+        ]);
     }
 
     public function AddDaftarTugas(Request $request)
@@ -78,9 +82,30 @@ class ProjectController extends Controller
                 $value->pivot->save();
             }
         }
-        foreach($user->to_dos()->where('project_id','=',Session::get('projectSekarang'))->get() as $key => $value) {
-            echo ($value->pivot->weights);
-        }
+    }
+
+    public function IndexDetailTugas(Request $request) {
+        $to_do = ToDo::where('id','=',$request->id)->first();
+
+        $status = $to_do->users()->where('user_id','=',getUser()->id)->get()[0]->pivot->status;
+
+        return view('project.detail_tugas',[
+            "to_do" => $to_do,
+            "status" => $status
+        ]);
+    }
+
+    public function UpdateStatus(Request $request) {
+        $to_do = ToDo::where('id','=',$request->id)->first();
+
+        $user = $to_do->users()->where('user_id','=',getUser()->id)->first();
+
+        $user->pivot->status = $request->status;
+        $user->pivot->save();
+
+        return redirect()->route('project_detail_tugas', [
+            "id" => $request->id
+        ]);
     }
 
     public function IndexKalender(Request $request) {

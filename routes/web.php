@@ -38,12 +38,20 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('project')->group(function () {
     Route::get('/', [ProjectController::class, 'Project'])->name('project_home');
+
+    //Daftar Tugas
     Route::get('/daftar-tugas', [ProjectController::class, 'IndexDaftarTugas'])->name('project_daftar_tugas');
     Route::get('/ajax-daftar-tugas', [ProjectController::class, 'DaftarTugas']);
     Route::get('/update-custom-sort', [ProjectController::class, 'UpdateCustomSort']);
+    Route::get('/detail-tugas', [ProjectController::class, 'IndexDetailTugas'])->name('project_detail_tugas');
+    Route::get('/update-status', [ProjectController::class, 'UpdateStatus'])->name('project_update_status_to_do');
+
+    //Add
     Route::get('/add', [ProjectController::class, 'AddDaftarTugas'])->name('project_add_tugas');
     Route::post('/add', [ToDoController::class, 'CreateToDo'])->name('project_add_tugas_post');
     Route::post('/assign', [ToDoController::class, 'AssignToDo'])->name('project_assign_tugas_post');
+
+    //Kalender
     Route::get('/kalender', [ProjectController::class, 'IndexKalender'])->name('project_kalender');
     Route::get('/ajax-kalender', [ProjectController::class, 'Kalender']);
     Route::get('/ajax-detail-kalender', [ProjectController::class, 'DetailKalender']);

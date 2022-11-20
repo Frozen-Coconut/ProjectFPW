@@ -32,7 +32,6 @@ var values = [];
 function ubahModeSort() {
     if(mode_sort) {
         $("#save_sort").html('Urutkan');
-
         updateCustomSort();
     }
     else {
@@ -110,7 +109,6 @@ function updateCustomSort() {
             "value":values
         }
     }).then(res => {
-        alert(res);
         clear();
     });
 }
