@@ -18,7 +18,8 @@ class ProjectController extends Controller
 
     public function Project(Request $request)
     {
-        return view('project.project');
+        $project = Project::find(session('projectSekarang'));
+        return view('project.project', compact('project'));
     }
 
     public function IndexDaftarTugas(Request $request)
