@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\PostComment;
 use App\Models\ToDo;
 use Illuminate\Support\Facades\Session;
 
@@ -44,6 +45,14 @@ class ProjectController extends Controller
 
     public function AddPostComment(Request $request)
     {
+        $request->validate([
+            'comment' => 'required'
+        ]);
+        PostComment::create([
+            'user_id' => getUser()->id,
+            'post_id' => $request->id,
+            'contents' => $request->comment
+        ]);
         return redirect()->back();
     }
 
