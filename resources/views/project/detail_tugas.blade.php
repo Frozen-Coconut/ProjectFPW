@@ -1,7 +1,7 @@
 @extends('project.layout.project')
 
 @section('js')
-
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
 @endsection
 
 @section('content')
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="w-full flex flex-row" style="height:50%">
-        <div class="h-full" style="width:50%;">
+        <div class="h-full" style="width:75%;">
             <p class="text-2xl mb-10 text-gray-600">{{'Deadline pada tanggal '.date_format(date_create($to_do->deadline),'d F Y')}}</p>
             <form action="{{route('project_add_comment')}}" method="POST" class="block p-6 rounded-lg shadow-lg bg-white w-full max-h-44 border mb-8 flex flex-col">
                 @csrf
@@ -36,9 +36,9 @@
                     <button type="submit" name="add" id="add" class="bg-blue-600 text-white mt-4 rounded-lg px-4 py-1">Tambah Post</button>
                 </div>
             </form>
-            <div class="overflow-y-auto">
+            <div class="container h-full w-full overflow-y-auto">
                 @foreach ($to_do->to_do_comments()->orderBy('id', 'desc')->get() as $post)
-                <div class="mb-5">
+                <div class="block p-6 rounded-lg shadow-lg bg-white w-full max-h-44 border mb-5 flex flex-col">
                     <div class="flex items-center mb-3">
                         <img src="https://via.placeholder.com/100" class="h-12 w-12 rounded-full mr-4" alt="placeholder">
                         <div class="flex flex-col">
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="h-full flex justify-end px-10 py-3" style="width: 50%">
-            <div style="width:60%;height:100%" class=" border border-gray-800 rounded-xl p-5 overflow-y-auto">
+            <div style="width:60%;height:100%" class=" border border-gray-800 rounded-xl p-5 overflow-y-auto container">
                 <span class="font-medium ml-4 mb-3">Diserahkan Kepada</span>
                 @foreach ($to_do->users as $item)
                 <div class="w-max p-2.5 mb-3 flex justify-center items-center">

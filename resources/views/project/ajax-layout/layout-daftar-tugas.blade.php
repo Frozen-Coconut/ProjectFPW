@@ -1,3 +1,4 @@
+<div style="height: 70vh" class="w-full overflow-y-auto container">
 @foreach ($daftar_tugas as $value)
     <a href="{{route('project_detail_tugas',[
         "id"=>$value->id
@@ -32,3 +33,4 @@
         </div>
     </a>
 @endforeach
+</div>
