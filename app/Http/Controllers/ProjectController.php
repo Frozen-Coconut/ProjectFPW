@@ -228,4 +228,8 @@ class ProjectController extends Controller
             "daftar_tugas" => $daftar_tugas
         ]);
     }
+
+    public function IndexUpgrade(Request $request) {
+        return view('project.upgrade');
+    }
 }

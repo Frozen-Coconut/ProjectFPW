@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SnapController;
 use App\Http\Controllers\ToDoController;
 
 /*
@@ -58,6 +59,11 @@ Route::prefix('project')->group(function () {
     Route::get('/kalender', [ProjectController::class, 'IndexKalender'])->name('project_kalender');
     Route::get('/ajax-kalender', [ProjectController::class, 'Kalender']);
     Route::get('/ajax-detail-kalender', [ProjectController::class, 'DetailKalender']);
+
+    //Upgrade
+    Route::get('/upgrade', [ProjectController::class, 'IndexUpgrade'])->name('project_upgrade');
+    Route::get('/ajax-snapToken',[SnapController::class, 'GetSnap']);
+    Route::get('/ajax-update', [SnapController::class, 'Receive']);
 });
 
 Route::prefix('file')->group(function () {
