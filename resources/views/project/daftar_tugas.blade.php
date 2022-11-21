@@ -2,10 +2,11 @@
 
 @section('js')
     <script src="{{asset('js/jquery-daftar-tugas.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('css/main.css')}}">
 @endsection
 
 @section('content')
-<div class="p-6">
+<div class="p-6 h-full w-full">
     <p class="text-3xl mb-10">Daftar Tugas</p>
     <div class="flex justify-center" style="width: 100%">
         <div class="mb-3 w-full px-10">
@@ -32,7 +33,7 @@
         </select>
     </div>
     @endif
-    <div class="flex flex-col justify-end overflow-y-auto" id="layout-daftar-tugas">
+    <div style="" class="flex flex-col justify-end " id="layout-daftar-tugas">
 
     </div>
 </div>

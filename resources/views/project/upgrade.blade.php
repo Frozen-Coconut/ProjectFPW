@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="h-full p-10 w-full flex justify-center" style="">
-    <div class="detail-kalender p-5 mb-5 overflow-y-auto" id="layout-detail-kalender">
+    <div class="detail-kalender p-5 mb-5 container overflow-y-auto" id="layout-detail-kalender">
         <button class="button" onclick="snap_pay()">
             Pay Now
         </button>
