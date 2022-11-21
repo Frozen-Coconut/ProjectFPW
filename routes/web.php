@@ -68,5 +68,6 @@ Route::prefix('project')->group(function () {
 
 Route::prefix('file')->group(function () {
     Route::get('/', [FileController::class, 'Main'])->name('file_main');
+    Route::get('/upload', [FileController::class, 'Upload'])->name('file_upload');
     Route::get('/edit', [FileController::class, 'Edit'])->name('file_edit');
 });

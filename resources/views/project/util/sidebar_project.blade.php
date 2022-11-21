@@ -46,8 +46,13 @@
               <span class="group-hover:text-gray-700">Daftar Tugas</span>
             </a>
           </li>
+          @if (session('tipeProjectSekarang') == 1)
           <li class="min-w-max">
-            <a href="#" class="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600">
+            @if (route('file_main') == url()->current())
+            <a href="{{route('file_main')}}" aria-label="dashboard" class="relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white">
+            @else
+            <a href="{{route('file_main')}}" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">
+            @endif
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path class="fill-current text-gray-300 group-hover:text-cyan-300" fill-rule="evenodd" d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z" clip-rule="evenodd" />
                 <path class="fill-current text-gray-600 group-hover:text-cyan-600" d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z" />
@@ -55,6 +60,7 @@
               <span class="group-hover:text-gray-700">File</span>
             </a>
           </li>
+          @else
           <li class="min-w-max">
             @if (route('project_upgrade') == url()->current())
             <a href="{{route('project_upgrade')}}" aria-label="dashboard" class="relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white">
@@ -68,6 +74,7 @@
               <span class="group-hover:text-gray-700">Pembayaran</span>
             </a>
           </li>
+          @endif
         </ul>
       </div>
       <div class="w-max -mb-3">

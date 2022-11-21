@@ -1,13 +1,15 @@
-@extends('layout.main')
+@extends('project.layout.project')
 
-@section('body')
-<div class="container w-screen min-h-screen px-4 py-20 relative">
+@section('content')
+<div class="w-full h-screen flex flex-col p-8 overflow-y-auto">
+    <p class="text-3xl mb-8">File Anda</p>
+
     <table class="table-auto w-full border-2 rounded text-center">
         <thead>
             <tr class="border-b-2">
-                <th>Name</th>
-                <th>Owner</th>
-                <th>Last Modified</th>
+                <th>Nama File</th>
+                <th>Pemilik</th>
+                <th>Perubahan Terakhir</th>
             </tr>
         </thead>
         <tbody>
@@ -28,8 +30,8 @@
             </tr>
         </tbody>
     </table>
-
-    <button type="button" id="back" class="w-20 h-10 border rounded bg-gray-500 text-white absolute top-4 left-4">Back</button>
-    <button type="button" id="upload" class="w-32 h-10 border rounded bg-blue-500 text-white absolute top-4 right-4">Upload File</button>
+</div>
+<div class="fixed bottom-5 right-5">
+    <a href="{{route('file_upload')}}" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Tambah File</a>
 </div>
 @endsection

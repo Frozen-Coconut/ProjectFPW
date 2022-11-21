@@ -2,7 +2,8 @@
 
 @section('head')
 <link rel="stylesheet" href="{{asset('css/user-sidebar.css')}}">
-
+<link href="{{asset('css/jquery-linedtextarea.css')}}" type="text/css" rel="stylesheet" />
+<script src="{{asset('js/jquery-linedtextarea.js')}}"></script>
 @yield('js')
 
 @endsection
