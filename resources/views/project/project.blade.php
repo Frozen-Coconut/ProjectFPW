@@ -17,7 +17,7 @@
         </div>
     </form>
     @foreach ($project->posts()->orderBy('id', 'desc')->get() as $post)
-    <a href="{{route('project_detail_post')}}" class="block p-6 rounded-lg shadow-lg bg-white w-full max-h-44 border mb-4 flex flex-col">
+    <a href="{{route('project_detail_post')}}?id={{$post->id}}" class="block p-6 rounded-lg shadow-lg bg-white w-full max-h-44 border mb-4 flex flex-col">
         <div class="flex items-center mb-4">
             <img src="https://via.placeholder.com/100" class="h-12 w-12 rounded-full mr-4" alt="placeholder">
             <div class="flex flex-col">

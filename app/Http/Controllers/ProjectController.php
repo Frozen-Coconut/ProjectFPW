@@ -42,6 +42,11 @@ class ProjectController extends Controller
         return view('project.detail_post', compact('post'));
     }
 
+    public function AddPostComment(Request $request)
+    {
+        return redirect()->back();
+    }
+
     public function IndexDaftarTugas(Request $request)
     {
         return view('project.daftar_tugas',[
