@@ -13,7 +13,7 @@ function loadDaftarTugas() {
         type:"GET",
         url:"/project/ajax-daftar-tugas",
         data:{
-
+            'pm' : $("#pm").val()
         }
     }).then(res => {
         $("#layout-daftar-tugas").html(res);
@@ -125,9 +125,22 @@ function search() {
         url:"/project/ajax-daftar-tugas",
         data:{
             'search': $("#search-tag").val(),
-            'sort' : sort
+            'sort' : sort,
+            'pm' : $("#pm").val()
         }
     }).then(res => {
         $("#layout-daftar-tugas").html(res);
+    });
+}
+
+function notify(id) {
+    $.ajax({
+        type:"GET",
+        url:"/project/notify",
+        data:{
+            "id" :id
+        }
+    }).then(res => {
+        alert('User sudah di notify');
     });
 }

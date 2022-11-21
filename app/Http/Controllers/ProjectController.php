@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Models\PostComment;
 use App\Models\ToDo;
+use App\Models\Project;
+use App\Models\PostComment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
@@ -77,6 +78,10 @@ class ProjectController extends Controller
     public function DaftarTugas(Request $request) {
         $daftar_tugas = getUser()->to_dos()->where('project_id','=',Session::get('projectSekarang'));
 
+        if ($request->pm == 0) {
+            $daftar_tugas = Project::where('id','=',Session::get('projectSekarang'))->first()->to_dos();
+        }
+
         if ($request->search) {
             $daftar_tugas = $daftar_tugas->where('tag','like','%'.$request->search.'%');
         }
@@ -92,14 +97,24 @@ class ProjectController extends Controller
                 case(3):
                     $daftar_tugas = $daftar_tugas->orderBy('deadline','ASC');
                 case(4):
-                    $daftar_tugas = $daftar_tugas->orderBy('pivot_weights','ASC');
+                    if ($request->pm == 0) {
+                        //Kosongin
+                    }
+                    else {
+                        $daftar_tugas = $daftar_tugas->orderBy('pivot_weights','ASC');
+                    }
             }
         }
 
         $daftar_tugas = $daftar_tugas->get();
 
+        $tgl_sekarang = Carbon::now();
+
         return view('project.ajax-layout.layout-daftar-tugas',[
-            "daftar_tugas" => $daftar_tugas
+            "daftar_tugas" => $daftar_tugas,
+            "user" => getUser(),
+            "project" => Project::where('id','=',Session::get('projectSekarang'))->first(),
+            "tgl_sekarang" => $tgl_sekarang
         ]);
     }
 
@@ -120,14 +135,24 @@ class ProjectController extends Controller
         }
     }
 
+    public function NotifyLate(Request $request) {
+        $to_do = ToDo::where('id',$request->id)->first();
+
+        dd($to_do->users);
+    }
+
     public function IndexDetailTugas(Request $request) {
         $to_do = ToDo::where('id','=',$request->id)->first();
-
-        $status = $to_do->users()->where('user_id','=',getUser()->id)->get()[0]->pivot->status;
+        $status = -1;
+        if (getUser()->id != Project::where('id','=',Session::get('projectSekarang'))->first()->project_manager_id) {
+            $status = $to_do->users()->where('user_id','=',getUser()->id)->first()->pivot->status;
+        }
 
         return view('project.detail_tugas',[
             "to_do" => $to_do,
-            "status" => $status
+            "status" => $status,
+            "user" => getUser(),
+            "project" => Project::where('id','=',Session::get('projectSekarang'))->first(),
         ]);
     }
 

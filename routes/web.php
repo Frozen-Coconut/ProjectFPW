@@ -47,6 +47,7 @@ Route::prefix('project')->group(function () {
     Route::get('/daftar-tugas', [ProjectController::class, 'IndexDaftarTugas'])->name('project_daftar_tugas');
     Route::get('/ajax-daftar-tugas', [ProjectController::class, 'DaftarTugas']);
     Route::get('/update-custom-sort', [ProjectController::class, 'UpdateCustomSort']);
+    Route::get('/notify', [ProjectController::class, 'NotifyLate'])->name('project_notify_late');
     Route::get('/detail-tugas', [ProjectController::class, 'IndexDetailTugas'])->name('project_detail_tugas');
     Route::get('/update-status', [ProjectController::class, 'UpdateStatus'])->name('project_update_status_to_do');
     Route::post('/add-comment', [ToDoController::class, 'Comment'])->name('project_add_comment');

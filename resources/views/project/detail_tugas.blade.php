@@ -10,6 +10,7 @@
         <div class="flex items-center" style="width: 50%;">
             <p class="text-3xl mb-10">{{$to_do->name}}</p>
         </div>
+        @if($user->id != $project->project_manager_id)
         <div class="flex justify-end items-center" style="width: 50%;">
             @if($status == 1)
                 <a href="{{route('project_update_status_to_do',[
@@ -21,6 +22,7 @@
                 ])}}" style="height:35px" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Batalkan Selesai</a>
             @endif
         </div>
+        @endif
     </div>
     <div class="w-full flex flex-row" style="height:50%">
         <div class="h-full" style="width:75%;">
