@@ -49,6 +49,7 @@ Route::prefix('project')->group(function () {
     Route::get('/update-custom-sort', [ProjectController::class, 'UpdateCustomSort']);
     Route::get('/detail-tugas', [ProjectController::class, 'IndexDetailTugas'])->name('project_detail_tugas');
     Route::get('/update-status', [ProjectController::class, 'UpdateStatus'])->name('project_update_status_to_do');
+    Route::post('/add-comment', [ToDoController::class, 'Comment'])->name('project_add_comment');
 
     //Add
     Route::get('/add', [ProjectController::class, 'AddDaftarTugas'])->name('project_add_tugas');

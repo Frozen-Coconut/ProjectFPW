@@ -6,6 +6,7 @@ use App\Models\ToDo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ToDoComment;
 use Illuminate\Support\Facades\Session;
 
 class ToDoController extends Controller
@@ -59,5 +60,25 @@ class ToDoController extends Controller
             Session::flash('errMsg', 'Tugas sudah pernah ditugaskan !');
             return redirect()->route('project_add_tugas');
         }
+    }
+
+    public function Comment(Request $request) {
+        $request->validate([
+            "comment" => 'required'
+        ],[
+            '*.required' => ':attribute harus diisi!',
+        ],[
+            'comment' => 'Komentar'
+        ]);
+
+        ToDoComment::create([
+            "user_id" => getUser()->id,
+            "to_do_id" => $request->id_to_do,
+            "contents" => $request->comment
+        ]);
+
+        return redirect()->route('project_detail_tugas', [
+            "id" => $request->id_to_do
+        ]);
     }
 }
