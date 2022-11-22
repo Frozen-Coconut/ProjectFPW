@@ -9,6 +9,7 @@
             <tr class="border-b-2">
                 <th>File</th>
                 <th>Type</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -16,18 +17,29 @@
             <tr class="border-b hover:bg-gray-100">
                 <td><a href="{{route('file_main')}}?path=/{{$path_sebelumnya}}">..</a></td>
                 <td>Directory</td>
+                <td></td>
             </tr>
             @endif
             @foreach ($folders as $folder)
             <tr class="border-b hover:bg-gray-100">
                 <td><a href="{{route('file_main')}}?path={{str_replace("public/$project/", '', $folder)}}">{{basename($folder)}}</a></td>
                 <td>Directory</td>
+                <td><form action="{{route('file_edit_post')}}" method="POST">
+                    @csrf
+                    <button type="submit" name="deleteFolder" class="m-2 inline-block px-5 py-2 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Delete</button>
+                    <input type="hidden" name="path" value="{{str_replace("public/$project/", '', $folder)}}">
+                </form></td>
             </tr>
             @endforeach
             @foreach ($files as $file)
             <tr class="border-b hover:bg-gray-100">
                 <td><a href="{{route('file_edit')}}?path={{str_replace("public/$project/", '', $file)}}">{{basename($file)}}</a></td>
                 <td>File</td>
+                <td><form action="{{route('file_edit_post')}}" method="POST">
+                    @csrf
+                    <button type="submit" name="delete" class="m-2 inline-block px-5 py-2 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Delete</button>
+                    <input type="hidden" name="path" value="{{str_replace("public/$project/", '', $file)}}">
+                </form></td>
             </tr>
             @endforeach
         </tbody>

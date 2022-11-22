@@ -87,6 +87,9 @@ class FileController extends Controller
             return redirect()->route('file_main')->with('message_success', 'Berhasil menghapus file!');
         } else if ($request->has('download')) {
             return Storage::download($path);
+        } else if ($request->has('deleteFolder')) {
+            Storage::deleteDirectory($path);
+            return redirect()->route('file_main')->with('message_success', 'Berhasil menghapus folder!');
         }
         return redirect()->route('file_main');
     }
