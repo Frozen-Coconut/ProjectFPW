@@ -42,4 +42,8 @@ class Project extends Model
     public function posts() {
         return $this->hasMany(Post::class,'project_id','id');
     }
+
+    public function notifications() {
+        return $this->hasMany(Notification::class,'project_id','id');
+    }
 }

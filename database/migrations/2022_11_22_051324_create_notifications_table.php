@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('to_dos', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('content');
+            $table->integer('status')->default(1);
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('project_id')->references('id')->on('projects');
-            $table->date('deadline');
-            $table->string('tag')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('to_dos');
+        Schema::dropIfExists('notifications');
     }
 };

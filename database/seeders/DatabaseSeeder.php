@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
                 'email' => "user$i@example.com",
                 'password' => bcrypt("user$i"),
                 'occupational_status' => random_int(0, 3)
-            ]);
+            ]); 
         }
 
         // projects

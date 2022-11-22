@@ -14,11 +14,14 @@ class ToDoController extends Controller
     public function CreateToDo(Request $request) {
 
         $request->validate([
-            "name_tugas" => 'required'
+            "name_tugas" => 'required',
+            "deadline" => 'after_or_equal:today'
         ], [
-            '*.required' => ':attribute harus diisi!'
+            '*.required' => ':attribute harus diisi!',
+            'deadline.after_or_equal' => ':attribute tidak boleh sebelum hari ini!'
         ],[
-            "name_tugas" => 'Nama Tugas'
+            "name_tugas" => 'Nama Tugas',
+            "deadline" => 'Deadline'
         ]);
 
         ToDo::create([

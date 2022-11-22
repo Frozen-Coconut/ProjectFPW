@@ -9,6 +9,7 @@ use App\Models\PostComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
@@ -138,7 +139,16 @@ class ProjectController extends Controller
     public function NotifyLate(Request $request) {
         $to_do = ToDo::where('id',$request->id)->first();
 
-        dd($to_do->users);
+        foreach($to_do->users as $user) {
+            if ($user->pivot->status == 1) {
+                Notification::create([
+                    "content" => 'Cepat kerjakan to do '.$to_do->name,
+                    "status" => 1,
+                    "user_id" => $user->id,
+                    "project_id" => $to_do->project_id
+                ]);
+            }
+        }
     }
 
     public function IndexDetailTugas(Request $request) {

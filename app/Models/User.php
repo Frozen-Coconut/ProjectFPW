@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function to_do_comments() {
         return $this->hasMany(ToDoComment::class, 'user_id', 'id');
     }
+
+    public function notifications() {
+        return $this->hasMany(Notification::class, 'user_id', 'id');
+    }
 }
