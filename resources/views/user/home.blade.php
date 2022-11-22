@@ -13,8 +13,9 @@
           {{-- <p class="text-gray-700 text-base mb-4">
             Ini adalah contoh deskripsi project...
           </p> --}}
-          <div class="w-full bg-gray-200 rounded-full">
-            <div class="bg-green-600 text-xs font-medium text-green-100 text-center p-0.5 leading-8 rounded-l-full h-10" style="width: {{$project->percent_completed()}}%">{{$project->percent_completed()}}%</div>
+          <div class="w-full bg-gray-200 rounded-full inline-flex relative">
+            <div class="bg-green-600 text-xs font-medium text-gray-500 text-center leading-8 rounded-l-full h-10" style="width: {{$project->percent_completed()}}%"></div>
+            <p class="absolute inline-block text-xs font-medium text-gray-900 z-5 text-center" style="top:50%;right:50%;transform:translate(50%,-50%)">{{$project->percent_completed()}}%</p>
           </div>
           <a href="{{route('user_project', [
             'id' => $project->id
