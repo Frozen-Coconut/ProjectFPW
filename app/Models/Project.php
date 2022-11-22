@@ -42,4 +42,21 @@ class Project extends Model
     public function posts() {
         return $this->hasMany(Post::class,'project_id','id');
     }
+
+    public function percent_completed() {
+        $total = 0;
+        $done = 0;
+        foreach ($this->to_dos as $todo) {
+            foreach ($todo->users as $user) {
+                $total++;
+                if ($user->pivot->status != 1) {
+                    $done++;
+                }
+            }
+        }
+        if ($total == 0) {
+            return 0;
+        }
+        return floor(($done / $total) * 100);
+    }
 }
