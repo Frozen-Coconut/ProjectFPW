@@ -1,6 +1,12 @@
 @extends('layout.main')
 
 @section('body')
+@include('util.message')
+@if (session('message_error'))
+            <div class="w-full bg-red-200 rounded">{{session('message_error')}}</div>
+        @elseif (session('message_success'))
+            <div class="w-full bg-green-200 rounded">{{session('message_success')}}</div>
+        @endif
 <h1 class="text-xl">Register (MASIH JELEK, JANGAN LUPA DIPERBAIKI)</h1>
 <a href="https://v1.tailwindcss.com/components/forms">https://v1.tailwindcss.com/components/forms</a>
 <form action="{{route('doRegister')}}" method="POST">

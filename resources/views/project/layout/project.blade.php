@@ -12,6 +12,7 @@
 <div class="min-h-screen bg-gray-50 flex">
     @include('project.util.sidebar_project')
     <div class="w-full h-screen">
+        @include('util.message')
         @yield('content')
     </div>
 </div

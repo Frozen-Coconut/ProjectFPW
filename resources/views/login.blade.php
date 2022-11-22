@@ -1,6 +1,7 @@
 @extends('layout.main')
 
 @section('body')
+@include('util.message')
 <h1 class="text-xl">Login (MASIH JELEK, JANGAN LUPA DIPERBAIKI)</h1>
 <a href="https://v1.tailwindcss.com/components/forms">https://v1.tailwindcss.com/components/forms</a>
 <form action="{{route('doLogin')}}" method="POST">

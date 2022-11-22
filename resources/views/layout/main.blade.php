@@ -10,11 +10,6 @@
     @yield('head')
 </head>
 <body>
-    @if (session('message_error'))
-        <div class="w-full bg-red-200">{{session('message_error')}}</div>
-    @elseif (session('message_success'))
-        <div class="w-full bg-green-200">{{session('message_success')}}</div>
-    @endif
     @yield('body')
 </body>
 </html>
