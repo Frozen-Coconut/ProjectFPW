@@ -43,6 +43,11 @@ Route::prefix('project')->group(function () {
     Route::get('/post/detail', [ProjectController::class, 'DetailPost'])->name('project_detail_post');
     Route::post('/post/detail', [ProjectController::class, 'AddPostComment'])->name('project_add_post_comment');
 
+    //Notifikasi
+    Route::get('/notification', [ProjectController::class, 'IndexNotification'])->name('project_notification');
+    Route::get('/ajax-notification', [ProjectController::class, 'Notification']);
+    Route::get('/delete-notification', [ProjectController::class, 'DeleteNotification']);
+
     //Daftar Tugas
     Route::get('/daftar-tugas', [ProjectController::class, 'IndexDaftarTugas'])->name('project_daftar_tugas');
     Route::get('/ajax-daftar-tugas', [ProjectController::class, 'DaftarTugas']);

@@ -24,7 +24,11 @@ class ProjectController extends Controller
     public function Project(Request $request)
     {
         $project = Project::find(session('projectSekarang'));
-        return view('project.project', compact('project'));
+        $user = getUser();
+        return view('project.project', [
+            "project" => $project,
+            "user" => $user
+        ]);
     }
 
     public function AddPost(Request $request)
@@ -57,6 +61,30 @@ class ProjectController extends Controller
             'contents' => $request->comment
         ]);
         return redirect()->back();
+    }
+
+    public function IndexNotification(Request $request) {
+        $user = getUser();
+        $user->notifications()->where('project_id','=',Session::get('projectSekarang'))->where('status','=',1)->update([
+            "status" => 2
+        ]);
+
+        return view('project.notification');
+    }
+
+    public function Notification(Request $request) {
+
+        $notification = getUser()->notifications()->where('project_id','=',Session::get('projectSekarang'))->where('status','<',3)->get();
+
+        return view('project.ajax-layout.layout-notifikasi', [
+            "notification" => $notification
+        ]);
+    }
+
+    public function DeleteNotification(Request $request) {
+        getUser()->notifications()->where('id','=',$request->id)->update([
+            "status" => 3
+        ]);
     }
 
     public function IndexDaftarTugas(Request $request)
