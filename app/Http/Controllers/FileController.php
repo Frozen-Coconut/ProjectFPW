@@ -74,12 +74,16 @@ class FileController extends Controller
 
     public function EditPost(Request $request)
     {
-        if (!$request->has('save')) {
-            return redirect()->back();
+        if ($request->has('save')) {
+            $path = '/public/' . session('projectSekarang') . '/' . $request->path;
+            $text = $request->text;
+            Storage::put($path, $text);
+            return redirect()->route('file_main')->with('message_success', 'Berhasil mengubah file!');
+        } else if ($request->has('delete')) {
+            $path = '/public/' . session('projectSekarang') . '/' . $request->path;
+            Storage::delete($path);
+            return redirect()->route('file_main')->with('message_success', 'Berhasil menghapus file!');
         }
-        $path = '/public/' . session('projectSekarang') . '/' . $request->path;
-        $text = $request->text;
-        Storage::put($path, $text);
         return redirect()->route('file_main');
     }
 }
