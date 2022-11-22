@@ -31,19 +31,26 @@ class FileController extends Controller
     {
         $request->validate([
             'file' => 'required',
-            'folder' => 'required|not_regex:/\.\./',
-            'name' => 'not_regex:/\.\./'
+            'folder' => trim($request->folder) != '' ? 'not_regex:/\.\./' : '',
+            'name' => trim($request->name) != '' ? ['not_regex:/\.\./', 'not_regex:/\//'] : ''
         ]);
         try {
             $project = session('projectSekarang');
             $file = $request->file('file');
-            $folder = trim($request->folder, '/');
+            $folder = '';
+            if (trim($request->folder) != '') {
+                $folder = trim($request->folder, '/');
+            }
+            $name = $file->getClientOriginalName();
+            if (trim($request->name) != '') {
+                $name = $request->name;
+            }
             $path = "/public/$project/$folder/";
-            if (Storage::exists("$path/" . $file->getClientOriginalName())) {
+            if (Storage::exists("$path/" . $name)) {
                 return redirect()->route('file_upload')->with('message_error', 'File sudah ada!');
             }
             Storage::makeDirectory($path);
-            Storage::putFileAs($path, $file, $file->getClientOriginalName());
+            Storage::putFileAs($path, $file, $name);
         } catch(Exception $ex) {
             return redirect()->route('file_upload')->with('message_error', 'Gagal upload file!');
         }

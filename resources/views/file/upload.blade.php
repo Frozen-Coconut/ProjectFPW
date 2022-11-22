@@ -19,9 +19,9 @@
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2 text-xl" for="folder">
-                Folder Tujuan
+                Folder Tujuan (Optional)
             </label>
-            <input name="folder" id="folder" type="text" class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="/" placeholder="/example/myfolder">
+            <input name="folder" id="folder" type="text" class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="/example/myfolder" value="{{old('folder')}}">
             @error('folder')
             <p class="text-red-500">{{$message}}</p>
             @enderror
@@ -30,7 +30,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2 text-xl" for="folder">
                 Nama File Tujuan (Optional)
             </label>
-            <input name="name" id="name" type="text" class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="myfile.txt">
+            <input name="name" id="name" type="text" class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="myfile.txt" value="{{old('name')}}">
             @error('name')
             <p class="text-red-500">{{$message}}</p>
             @enderror
