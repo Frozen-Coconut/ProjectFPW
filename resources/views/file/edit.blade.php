@@ -5,7 +5,12 @@
     @csrf
     <div class="mb-6 flex justify-between items-center">
         <a href="{{route('file_main')}}" class="inline-block px-6 py-2.5 bg-gray-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out">Kembali</a>
-        <p id="name" class="h-10 leading-10 text-black text-lg">{{basename($file)}}</p>
+        {{-- <p id="name" class="h-10 leading-10 text-black text-lg">{{basename($file)}}</p> --}}
+        @error('name')
+        <p class="text-red-500">{{$message}}</p>
+        @enderror
+        <input name="name" type="text" class="shadow appearance-none border bg-gray-50 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{basename($file)}}">
+
         <input type="hidden" name="path" id="path" value="{{$file}}">
     </div>
     <textarea id="text" name="text" rows="24" class="w-full">{{$text}}</textarea>

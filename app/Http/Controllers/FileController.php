@@ -19,8 +19,7 @@ class FileController extends Controller
                 $path .= $request->path;
             }
         }
-        $temp = explode('/', $path);
-        $path_sebelumnya = trim(str_replace('/public/' . session('projectSekarang'), '', str_replace($temp[sizeof($temp) - 1], '', $path)), '/');
+        $path_sebelumnya = trim(str_replace('/public/' . session('projectSekarang'), '', str_replace(basename($path), '', $path)), '/');
         $folders = Storage::directories($path);
         $files = Storage::files($path);
         $project = session('projectSekarang');
@@ -75,9 +74,13 @@ class FileController extends Controller
     public function EditPost(Request $request)
     {
         if ($request->has('save')) {
+            $request->validate([
+                'name' => ['required', 'not_regex:/\//', 'not_regex:/\.\./']
+            ]);
             $path = '/public/' . session('projectSekarang') . '/' . $request->path;
             $text = $request->text;
             Storage::put($path, $text);
+            Storage::move($path, str_replace(basename($path), '', $path) . $request->name);
             return redirect()->route('file_main')->with('message_success', 'Berhasil mengubah file!');
         } else if ($request->has('delete')) {
             $path = '/public/' . session('projectSekarang') . '/' . $request->path;
