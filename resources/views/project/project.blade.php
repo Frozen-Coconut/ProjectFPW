@@ -4,7 +4,7 @@
 <div class="w-full h-screen flex flex-col p-8 overflow-y-auto">
     <p class="text-4xl mb-6 ml-4">{{$project->name_project}}</p>
     <div class="w-full bg-gray-200 rounded-full mb-8">
-        <div class="bg-green-600 text-xs font-medium text-green-100 text-center p-0.5 leading-8 rounded-l-full h-10" style="width: 20%">20%</div>
+        <div class="bg-green-600 text-xs font-medium text-green-100 text-center p-0.5 leading-8 rounded-l-full h-10" style="width: {{$project->percent_completed()}}%">{{$project->percent_completed()}}%</div>
     </div>
     <form action="{{route('project_add_post')}}" method="POST" class="block p-6 rounded-lg shadow-lg bg-white w-full max-h-44 border mb-4 flex flex-col">
         @csrf

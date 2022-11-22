@@ -14,7 +14,7 @@
             Ini adalah contoh deskripsi project...
           </p> --}}
           <div class="w-full bg-gray-200 rounded-full">
-            <div class="bg-green-600 text-xs font-medium text-green-100 text-center p-0.5 leading-8 rounded-l-full h-10" style="width: 20%">20%</div>
+            <div class="bg-green-600 text-xs font-medium text-green-100 text-center p-0.5 leading-8 rounded-l-full h-10" style="width: {{$project->percent_completed()}}%">{{$project->percent_completed()}}%</div>
           </div>
           <a href="{{route('user_project', [
             'id' => $project->id
