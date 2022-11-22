@@ -10,7 +10,16 @@ class FileController extends Controller
 {
     public function Main(Request $request)
     {
-        return view('file.main');
+        $path = '/public/' . session('projectSekarang') . '/';
+        if ($request->has('path')) {
+            $request->validate([
+                'path' => 'not_regex:/../'
+            ]);
+            $path .= $request->path;
+        }
+        $folders = Storage::directories($path);
+        $files = Storage::files($path);
+        return view('file.main', compact('folders', 'files'));
     }
 
     public function Upload(Request $request)
@@ -22,14 +31,19 @@ class FileController extends Controller
     {
         $request->validate([
             'file' => 'required',
-            'folder' => 'required|not_regex:/\.\./'
+            'folder' => 'required|not_regex:/\.\./',
+            'name' => 'not_regex:/\.\./'
         ]);
         try {
             $project = session('projectSekarang');
             $file = $request->file('file');
             $folder = trim($request->folder, '/');
-            Storage::makeDirectory("/public/$project/$folder");
-            Storage::putFileAs("/public/$project/$folder/", $file, $file->getClientOriginalName());
+            $path = "/public/$project/$folder/";
+            if (Storage::exists("$path/" . $file->getClientOriginalName())) {
+                return redirect()->route('file_upload')->with('message_error', 'File sudah ada!');
+            }
+            Storage::makeDirectory($path);
+            Storage::putFileAs($path, $file, $file->getClientOriginalName());
         } catch(Exception $ex) {
             return redirect()->route('file_upload')->with('message_error', 'Gagal upload file!');
         }

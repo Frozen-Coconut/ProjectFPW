@@ -7,27 +7,23 @@
     <table class="table-auto w-full border-2 rounded text-center">
         <thead>
             <tr class="border-b-2">
-                <th>Nama File</th>
-                <th>Pemilik</th>
-                <th>Perubahan Terakhir</th>
+                <th>File</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($folders as $folder)
             <tr class="border-b hover:bg-gray-100">
-                <td>Ini_contoh_folder</td>
-                <td>User 1</td>
-                <td>2022-10-11 21:50</td>
+                <td>{{basename($folder)}}</td>
+                <td>Directory</td>
             </tr>
+            @endforeach
+            @foreach ($files as $file)
             <tr class="border-b hover:bg-gray-100">
-                <td>Ini_contoh_file_1.txt</td>
-                <td>User 1</td>
-                <td>2022-10-11 21:37</td>
+                <td>{{basename($file)}}</td>
+                <td>File</td>
             </tr>
-            <tr class="border-b hover:bg-gray-100">
-                <td>Ini_contoh_file_2.txt</td>
-                <td>User 2</td>
-                <td>2022-10-11 21:40</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
