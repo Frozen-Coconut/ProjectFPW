@@ -13,13 +13,18 @@ class FileController extends Controller
         $path = '/public/' . session('projectSekarang') . '/';
         if ($request->has('path')) {
             $request->validate([
-                'path' => 'not_regex:/../'
+                'path' => 'not_regex:/\.\./'
             ]);
-            $path .= $request->path;
+            if (!preg_match('/^\/+$/', $request->path)) {
+                $path .= $request->path;
+            }
         }
+        $temp = explode('/', $path);
+        $path_sebelumnya = trim(str_replace('/public/' . session('projectSekarang'), '', str_replace($temp[sizeof($temp) - 1], '', $path)), '/');
         $folders = Storage::directories($path);
         $files = Storage::files($path);
-        return view('file.main', compact('folders', 'files'));
+        $project = session('projectSekarang');
+        return view('file.main', compact('path', 'path_sebelumnya', 'folders', 'files', 'project'));
     }
 
     public function Upload(Request $request)
@@ -59,6 +64,22 @@ class FileController extends Controller
 
     public function Edit(Request $request)
     {
-        return view('file.edit');
+        if (!$request->has('path')) {
+            return redirect()->back();
+        }
+        $file = $request->path;
+        $text = Storage::get('/public/' . session('projectSekarang') . '/' . $file);
+        return view('file.edit', compact('file', 'text'));
+    }
+
+    public function EditPost(Request $request)
+    {
+        if (!$request->has('save')) {
+            return redirect()->back();
+        }
+        $path = '/public/' . session('projectSekarang') . '/' . $request->path;
+        $text = $request->text;
+        Storage::put($path, $text);
+        return redirect()->route('file_main');
     }
 }

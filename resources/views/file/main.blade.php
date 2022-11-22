@@ -12,15 +12,21 @@
             </tr>
         </thead>
         <tbody>
+            @if ($path != '/public/' . session('projectSekarang') . '/')
+            <tr class="border-b hover:bg-gray-100">
+                <td><a href="{{route('file_main')}}?path=/{{$path_sebelumnya}}">..</a></td>
+                <td>Directory</td>
+            </tr>
+            @endif
             @foreach ($folders as $folder)
             <tr class="border-b hover:bg-gray-100">
-                <td>{{basename($folder)}}</td>
+                <td><a href="{{route('file_main')}}?path={{str_replace("public/$project/", '', $folder)}}">{{basename($folder)}}</a></td>
                 <td>Directory</td>
             </tr>
             @endforeach
             @foreach ($files as $file)
             <tr class="border-b hover:bg-gray-100">
-                <td>{{basename($file)}}</td>
+                <td><a href="{{route('file_edit')}}?path={{str_replace("public/$project/", '', $file)}}">{{basename($file)}}</a></td>
                 <td>File</td>
             </tr>
             @endforeach

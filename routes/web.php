@@ -78,4 +78,5 @@ Route::prefix('file')->group(function () {
     Route::get('/upload', [FileController::class, 'Upload'])->name('file_upload');
     Route::post('/upload', [FileController::class, 'UploadPost'])->name('file_upload_post');
     Route::get('/edit', [FileController::class, 'Edit'])->name('file_edit');
+    Route::post('/edit', [FileController::class, 'EditPost'])->name('file_edit_post');
 });
