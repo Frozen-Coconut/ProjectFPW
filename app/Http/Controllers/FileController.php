@@ -19,7 +19,7 @@ class FileController extends Controller
                 $path .= $request->path;
             }
         }
-        $path_sebelumnya = trim(str_replace('/public/' . session('projectSekarang'), '', str_replace(basename($path), '', $path)), '/');
+        $path_sebelumnya = trim(str_replace(basename($path), '', str_replace('/public/' . session('projectSekarang'), '', $path)), '/');
         $folders = Storage::directories($path);
         $files = Storage::files($path);
         $project = session('projectSekarang');
@@ -67,20 +67,32 @@ class FileController extends Controller
             return redirect()->back();
         }
         $file = $request->path;
+        $basic_path = str_replace(basename($file), '', $file);
         $text = Storage::get('/public/' . session('projectSekarang') . '/' . $file);
-        return view('file.edit', compact('file', 'text'));
+        return view('file.edit', compact('file', 'basic_path', 'text'));
     }
 
     public function EditPost(Request $request)
     {
-        $path = '/public/' . session('projectSekarang') . '/' . $request->path;
+        $root_path = '/public/' . session('projectSekarang') . '/';
+        $basic_path = $request->basic_path;
+        $name = $request->name;
+
+        $path = $root_path . $request->path;
+        $new_path = $root_path . $basic_path . '/' . $name;
+
         if ($request->has('save')) {
             $request->validate([
+                'basic_path' => ['not_regex:/\.\./'],
                 'name' => ['required', 'not_regex:/\//', 'not_regex:/\.\./']
             ]);
             $text = $request->text;
             Storage::put($path, $text);
-            Storage::move($path, str_replace(basename($path), '', $path) . $request->name);
+            if (Storage::exists($new_path)) {
+                return redirect()->route('file_main')->with('message_error', 'File tujuan sudah ada!');
+            }
+            Storage::makeDirectory($root_path . $basic_path);
+            Storage::move($path, $new_path);
             return redirect()->route('file_main')->with('message_success', 'Berhasil mengubah file!');
         } else if ($request->has('delete')) {
             Storage::delete($path);
