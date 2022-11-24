@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
@@ -79,4 +80,8 @@ Route::prefix('file')->group(function () {
     Route::post('/upload', [FileController::class, 'UploadPost'])->name('file_upload_post');
     Route::get('/edit', [FileController::class, 'Edit'])->name('file_edit');
     Route::post('/edit', [FileController::class, 'EditPost'])->name('file_edit_post');
+});
+
+Route::prefix('admin')->group(function (){
+    Route::get('/', [AdminController::class, 'Home'])->name('admin_home');
 });
