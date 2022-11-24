@@ -10,7 +10,7 @@
 
 <div class="w-full place-content-center flex drop-shadow-sm">
     <div class="w-6/12 flex-col mt-20">
-        <form action="{{route('doLogin')}}" method="POST" class="border-solid border-gray-300 border rounded-lg p-10">
+        <form action="{{route('doRegister')}}" method="POST" class="border-solid border-gray-300 border rounded-lg p-10">
             <h1 class="text-xl pb-5">Register</h1>
             @csrf
               <div class="mb-4">
@@ -24,7 +24,7 @@
               </div>
               <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                  Email
+                  Nama Lengkap
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name" value="{{old('email')}}" type="text" placeholder="Nama Lengkap">
                 @error('name')
@@ -63,7 +63,7 @@
               </div>
 
               <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" name="login">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" name="register">
                   Sign Up
                 </button>
               </div>
