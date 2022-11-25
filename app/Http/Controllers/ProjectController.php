@@ -182,12 +182,15 @@ class ProjectController extends Controller
 
         foreach($to_do->users as $user) {
             if ($user->pivot->status == 1) {
-                Notification::create([
-                    "content" => 'Cepat kerjakan to do '.$to_do->name,
-                    "status" => 1,
-                    "user_id" => $user->id,
-                    "project_id" => $to_do->project_id
-                ]);
+                $notifikasiAmbil = Notification::where('project_id','=',$to_do->project_id)->where('user_id','=',$user->id)->first();
+                if ($notifikasiAmbil == null || $notifikasiAmbil->status == 3) {
+                    Notification::create([
+                        "content" => 'Cepat kerjakan to do '.$to_do->name,
+                        "status" => 1,
+                        "user_id" => $user->id,
+                        "project_id" => $to_do->project_id
+                    ]);
+                }
             }
         }
     }
