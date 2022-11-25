@@ -18,7 +18,7 @@ class CreateSnapTokenService extends Midtrans
     public function getSnapToken()
     {
         $snapToken = Snap::getSnapToken($this->arr);
-
+        
         return $snapToken;
     }
 }

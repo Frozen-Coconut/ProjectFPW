@@ -52,10 +52,8 @@ class SnapController extends Controller
                 'email' => $user->email,
             ]
         ];
-
         $midtrans = new CreateSnapTokenService($parameter);
         $snapToken = $midtrans->getSnapToken();
-
         return $snapToken;
     }
 
@@ -66,5 +64,10 @@ class SnapController extends Controller
         $htrans->status = $request->status;
         $htrans->transaction_method = $request->payment_type;
         $htrans->save();
+
+        if($request->status == 2){
+            Project::where('id', $htrans->project_id)
+            ->update(['status'=> 1]);
+        }
     }
 }
