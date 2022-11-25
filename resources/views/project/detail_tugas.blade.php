@@ -22,6 +22,12 @@
                 ])}}" style="height:35px" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Batalkan Selesai</a>
             @endif
         </div>
+        @else
+        <div class="flex justify-end items-center" style="width: 50%;">
+            <a href="{{route('project_edit_tugas', [
+                "id" => $to_do->id
+            ])}}" style="height:35px" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Edit Tugas</a>
+        </div>
         @endif
     </div>
     <div class="w-full flex flex-row" style="height:50%">

@@ -34,6 +34,28 @@ class ToDoController extends Controller
         return redirect()->route('project_add_tugas');
     }
 
+    public function EditToDo(Request $request) {
+        $request->validate([
+            "name_tugas" => 'required',
+            "deadline" => 'after_or_equal:today'
+        ], [
+            '*.required' => ':attribute harus diisi!',
+            'deadline.after_or_equal' => ':attribute tidak boleh sebelum hari ini!'
+        ],[
+            "name_tugas" => 'Nama Tugas',
+            "deadline" => 'Deadline'
+        ]);
+
+        ToDo::find($request->id_to_do)->update([
+            "name" => $request->name_tugas,
+            "project_id" => $request->id_project,
+            "deadline" => $request->deadline,
+            "tag" => $request->tag
+        ]);
+
+        return redirect()->route('project_daftar_tugas');
+    }
+
     public function AssignToDo(Request $request) {
 
         $request->validate([

@@ -100,7 +100,20 @@ class ProjectController extends Controller
         $project_sekarang = Project::find(Session::get('projectSekarang'));
 
         return view('project.add_daftar_tugas', [
-            "project_sekarang" => $project_sekarang
+            "project_sekarang" => $project_sekarang,
+            "edit" => 0
+        ]);
+    }
+
+    public function EditDaftarTugas(Request $request)
+    {
+        $project_sekarang = Project::find(Session::get('projectSekarang'));
+        $to_do_sekarang = ToDo::find($request->id);
+
+        return view('project.add_daftar_tugas', [
+            "project_sekarang" => $project_sekarang,
+            "edit" => 1,
+            "to_do_sekarang" => $to_do_sekarang
         ]);
     }
 
@@ -235,7 +248,9 @@ class ProjectController extends Controller
 
         $tanggal_deadline = [];
         foreach (getUser()->to_dos()->where('project_id','=',Session::get('projectSekarang'))->get() as $key => $value) {
-            $tanggal_deadline[date("d",strtotime($value->deadline))] = 1;
+            if (date("m", strtotime($value->deadline)) == str_pad(($request->month+1).'',2,'0',STR_PAD_LEFT)) {
+                $tanggal_deadline[date("d",strtotime($value->deadline))] = 1;
+            }
         }
 
         return view('user.ajax-layout.layout-kalender',[
