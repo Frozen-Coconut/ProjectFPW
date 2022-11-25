@@ -100,7 +100,20 @@ class ProjectController extends Controller
         $project_sekarang = Project::find(Session::get('projectSekarang'));
 
         return view('project.add_daftar_tugas', [
-            "project_sekarang" => $project_sekarang
+            "project_sekarang" => $project_sekarang,
+            "edit" => 0
+        ]);
+    }
+
+    public function EditDaftarTugas(Request $request)
+    {
+        $project_sekarang = Project::find(Session::get('projectSekarang'));
+        $to_do_sekarang = ToDo::find($request->id);
+
+        return view('project.add_daftar_tugas', [
+            "project_sekarang" => $project_sekarang,
+            "edit" => 1,
+            "to_do_sekarang" => $to_do_sekarang
         ]);
     }
 
@@ -169,12 +182,15 @@ class ProjectController extends Controller
 
         foreach($to_do->users as $user) {
             if ($user->pivot->status == 1) {
-                Notification::create([
-                    "content" => 'Cepat kerjakan to do '.$to_do->name,
-                    "status" => 1,
-                    "user_id" => $user->id,
-                    "project_id" => $to_do->project_id
-                ]);
+                $notifikasiAmbil = Notification::where('project_id','=',$to_do->project_id)->where('user_id','=',$user->id)->first();
+                if ($notifikasiAmbil == null || $notifikasiAmbil->status == 3) {
+                    Notification::create([
+                        "content" => 'Cepat kerjakan to do '.$to_do->name,
+                        "status" => 1,
+                        "user_id" => $user->id,
+                        "project_id" => $to_do->project_id
+                    ]);
+                }
             }
         }
     }
@@ -235,7 +251,9 @@ class ProjectController extends Controller
 
         $tanggal_deadline = [];
         foreach (getUser()->to_dos()->where('project_id','=',Session::get('projectSekarang'))->get() as $key => $value) {
-            $tanggal_deadline[date("d",strtotime($value->deadline))] = 1;
+            if (date("m", strtotime($value->deadline)) == str_pad(($request->month+1).'',2,'0',STR_PAD_LEFT)) {
+                $tanggal_deadline[date("d",strtotime($value->deadline))] = 1;
+            }
         }
 
         return view('user.ajax-layout.layout-kalender',[

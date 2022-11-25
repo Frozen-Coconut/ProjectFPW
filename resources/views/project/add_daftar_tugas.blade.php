@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="w-full flex flex-col h-screen justify-evenly px-10">
+    @if($edit == 0)
     <form action="{{route('project_add_tugas_post')}}" method="POST" class="bg-white shadow-md border-2 rounded px-8 pt-6 pb-8">
         <p class="text-3xl mb-5">Buat Tugas</p>
         @csrf
@@ -86,5 +87,47 @@
         </button>
         </div>
     </form>
+    @else
+    <form action="{{route('project_edit_tugas_post')}}" method="POST" class="bg-white shadow-md border-2 rounded px-8 pt-6 pb-8">
+        <p class="text-3xl mb-5">Edit Tugas</p>
+        @csrf
+        <input type="hidden" name="id_project" value="{{$project_sekarang->id}}">
+        <div class="mb-4 flex" style="width: 100%">
+        <div class="mr-4" style="width: 100%">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name_project">
+                Nama Tugas
+            </label>
+            <input class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name_tugas" id="name_tugas" type="text" placeholder="Nama Tugas" value="{{old('name_tugas') ?? $to_do_sekarang->name }}">
+            @error('name_tugas')
+            <p class="text-red-500">{{$message}}</p>
+            @enderror
+        </div>
+        <div style="width: 100%">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="invitation_code_1">
+                Tag
+            </label>
+            <input class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tag" id="tag" type="text" placeholder="Tag" value="{{old('tag') ?? $to_do_sekarang->tag}}">
+            @error('tag')
+            <p class="text-red-500">{{$message}}</p>
+            @enderror
+        </div>
+        </div>
+        <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="invitation_code_1">
+            Deadline
+        </label>
+        <input class="shadow appearance-none border bg-gray-50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="deadline" id="deadline" type="date" placeholder="Deadline" value="{{old('deadline')?? $to_do_sekarang->deadline}}">
+        @error('deadline')
+        <p class="text-red-500">{{$message}}</p>
+        @enderror
+        </div>
+        <input type="hidden" name="id_to_do" value="{{$to_do_sekarang->id}}">
+        <div class="flex items-center justify-between">
+        <button name="create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Edit Tugas
+        </button>
+        </div>
+    </form>
+    @endif
 </div>
 @endsection

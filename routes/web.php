@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
@@ -61,6 +62,8 @@ Route::prefix('project')->group(function () {
     Route::get('/add', [ProjectController::class, 'AddDaftarTugas'])->name('project_add_tugas');
     Route::post('/add', [ToDoController::class, 'CreateToDo'])->name('project_add_tugas_post');
     Route::post('/assign', [ToDoController::class, 'AssignToDo'])->name('project_assign_tugas_post');
+    Route::get('/edit', [ProjectController::class, 'EditDaftarTugas'])->name('project_edit_tugas');
+    Route::post('/edit', [ToDoController::class, 'EditToDo'])->name('project_edit_tugas_post');
 
     //Kalender
     Route::get('/kalender', [ProjectController::class, 'IndexKalender'])->name('project_kalender');
@@ -79,4 +82,9 @@ Route::prefix('file')->group(function () {
     Route::post('/upload', [FileController::class, 'UploadPost'])->name('file_upload_post');
     Route::get('/edit', [FileController::class, 'Edit'])->name('file_edit');
     Route::post('/edit', [FileController::class, 'EditPost'])->name('file_edit_post');
+});
+
+Route::prefix('admin')->group(function (){
+    Route::get('/', [AdminController::class, 'Home'])->name('admin_home');
+    Route::get('/projects', [AdminController::class, 'ProjectList'])->name('admin_projects');
 });
