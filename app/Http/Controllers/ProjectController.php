@@ -294,6 +294,9 @@ class ProjectController extends Controller
     }
 
     public function IndexUpgrade(Request $request) {
-        return view('project.upgrade');
+
+        $project_sekarang = Project::find(Session::get('projectSekarang'));
+        $status = $project_sekarang->status;
+        return view('project.upgrade', compact('status'));
     }
 }
