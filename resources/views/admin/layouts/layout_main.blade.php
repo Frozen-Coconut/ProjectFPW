@@ -9,7 +9,7 @@
 
 @section('body')
 <div class="min-h-screen bg-gray-50 flex">
-    @include('user.util.sidebar_main')
+    @include('admin.util.sidebar')
     <div class="w-full h-screen">
         @include('util.message')
         @yield('content')

@@ -84,4 +84,5 @@ Route::prefix('file')->group(function () {
 
 Route::prefix('admin')->group(function (){
     Route::get('/', [AdminController::class, 'Home'])->name('admin_home');
+    Route::get('/projects', [AdminController::class, 'ProjectList'])->name('admin_projects');
 });

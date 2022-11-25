@@ -1,10 +1,6 @@
-@extends('layout.main')
+@extends('admin.layouts.layout_main')
 
-@section('head')
-
-@endsection
-
-@section('body')
+@section('content')
 <div class="w-3/12">
     <canvas id="chart"></canvas>
 </div>
@@ -21,9 +17,9 @@
                 borderWidth: 1
             }]
         },
-        options: {
-
-        }
+        options: {}
     });
 </script>
+
+@endsection
 

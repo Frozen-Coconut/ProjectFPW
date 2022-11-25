@@ -6,6 +6,8 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPSTORM_META\type;
+
 class AdminController extends Controller
 {
     function Home(){
@@ -25,8 +27,12 @@ class AdminController extends Controller
             }
             else $unupgraded_counter++;
         }
-
-
         return view('admin.admin', compact('upgraded_counter', 'unupgraded_counter'));
+    }
+
+    function ProjectList(){
+        $projects = Project::all();
+
+        return view('admin.admin_projects', compact('projects'));
     }
 }
