@@ -78,19 +78,19 @@ class FileController extends Controller
         $basic_path = $request->basic_path;
         $name = $request->name;
 
-        $path = $root_path . '/' . $request->path;
-        $new_path = $root_path . $basic_path . '/' . $name;
+        $path = $root_path . trim(preg_replace('/\/+/', '/', $request->path), '/');
+        $new_path = $root_path . trim(preg_replace('/\/+/', '/', $basic_path . '/' . $name), '/');
 
         if ($request->has('save')) {
             $request->validate([
                 'basic_path' => trim($request->folder) != '' ? 'not_regex:/\.\./' : '',
                 'name' => ['required', 'not_regex:/\//', 'not_regex:/\.\./']
             ]);
-            if ($new_path != $path && Storage::exists($new_path)) {
-                return redirect()->route('file_main')->with('message_error', 'File tujuan sudah ada!');
-            }
             $text = $request->text;
             Storage::put($path, $text);
+            if ($new_path != $path && Storage::exists($new_path)) {
+                return redirect()->route('file_main')->with('message_error', 'File tujuan sudah ada!')->with('message_success', 'File berhasil tersimpan!');
+            }
             Storage::makeDirectory($root_path . $basic_path);
             Storage::move($path, $new_path);
             return redirect()->route('file_main')->with('message_success', 'Berhasil mengubah file!');
