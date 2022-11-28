@@ -71,9 +71,9 @@ Route::prefix('project')->group(function () {
     Route::get('/ajax-detail-kalender', [ProjectController::class, 'DetailKalender']);
 
     //Upgrade
-    Route::get('/upgrade', [ProjectController::class, 'IndexUpgrade'])->name('project_upgrade');
-    Route::get('/ajax-snapToken',[SnapController::class, 'GetSnap']);
-    Route::get('/ajax-update', [SnapController::class, 'Receive']);
+    Route::get('/upgrade', [ProjectController::class, 'IndexUpgrade'])->middleware('checkUserProjectRole:manager')->name('project_upgrade');
+    Route::get('/ajax-snapToken',[SnapController::class, 'GetSnap'])->middleware('checkUserProjectRole:manager');
+    Route::get('/ajax-update', [SnapController::class, 'Receive'])->middleware('checkUserProjectRole:manager');
 });
 
 Route::prefix('file')->group(function () {
