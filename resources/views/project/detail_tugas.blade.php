@@ -41,7 +41,7 @@
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
                 <div class="flex justify-end">
-                    <button type="submit" name="add" id="add" class="bg-blue-600 text-white mt-4 rounded-lg px-4 py-1">Tambah Post</button>
+                    <button type="submit" name="add" id="add" class="bg-blue-600 text-white mt-4 rounded-lg px-4 py-1">Tambah Komentar</button>
                 </div>
             </form>
             <div class="container h-full w-full overflow-y-auto">

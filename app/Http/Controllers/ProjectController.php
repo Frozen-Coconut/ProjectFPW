@@ -166,7 +166,7 @@ class ProjectController extends Controller
 
         foreach ($user->to_dos()->where('project_id','=',Session::get('projectSekarang'))->get() as $key => $value) {
             $key = array_search($value->id,$request->id);
-            if($key === false) {
+            if($key == false) {
                 $value->pivot->weights = count($request->id) + 1;
                 $value->pivot->save();
             }
