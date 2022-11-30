@@ -229,7 +229,6 @@ class ProjectController extends Controller
 
     public function Kalender(Request $request)
     {
-        //Konfigurasi :
         $x = $this->isLeapYear($request->year) ? 29 : 28;
         $months =[31, $x, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -239,11 +238,6 @@ class ProjectController extends Controller
         $tgl_terakhir_bulan_lalu = $months[$monthLalu] ;
 
         $hari_awal_bulan_ini = $this->findFirstDayMonth($request->month, $request->year);
-
-        //Catatan hari awal :
-        /*
-        0 = Minggu, .. , 6 = Sabtu
-        */
 
         $start = (($tgl_terakhir_bulan_lalu-$hari_awal_bulan_ini)+1)%$tgl_terakhir_bulan_lalu;
         if ($start == 0 ) $start = $tgl_terakhir_bulan_lalu;
