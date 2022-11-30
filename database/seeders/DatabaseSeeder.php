@@ -63,5 +63,29 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now()
             ]);
         }
+
+        for ($i = 1; $i <= $n; $i++) {
+            for ($j = 1; $j <= 5; $j++) {
+                ToDo::create([
+                    'name' => "To Do $j",
+                    'project_id' => $i,
+                    'deadline' => date_add(now(), date_interval_create_from_date_string("7 days"))
+                ]);
+            }
+        }
+
+        // posts
+        for ($i = 1; $i <= $n; $i++) {
+            Post::create([
+                'project_id' => $i,
+                'user_id' => $i,
+                'contents' => "Ini post dari User $i"
+            ]);
+            Post::create([
+                'project_id' => $i,
+                'user_id' => $n + 1 - $i,
+                'contents' => 'Ini post dari User ' . ($n + 1 - $i)
+            ]);
+        }
     }
 }

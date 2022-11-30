@@ -102,7 +102,7 @@ class UserController extends Controller
         $tanggal_deadline = [];
         foreach (getUser()->to_dos as $key => $value) {
             if (date("m", strtotime($value->deadline)) == str_pad(($request->month+1).'',2,'0',STR_PAD_LEFT)) {
-                $tanggal_deadline[date("d",strtotime($value->deadline))] = 1;
+                $tanggal_deadline[(int)date("d",strtotime($value->deadline))] = 1;
             }
         }
 
