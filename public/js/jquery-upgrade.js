@@ -48,5 +48,6 @@ function update_transaction(order_id, payment_type, status_code) {
         else {
             alert("Gagal");
         }
+        window.location.href="/project";
     });
 }

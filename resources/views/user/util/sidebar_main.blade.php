@@ -3,7 +3,7 @@
         <div>
           <div class="w-max p-2.5 flex justify-center items-center">
             <img src="https://via.placeholder.com/100" class="w-8 rounded-full" alt="placeholder">
-            <span class="font-medium ml-4">Contoh User</span>
+            <span class="font-medium ml-4">{{getUser()->name}}</span>
           </div>
           <ul class="mt-6 space-y-2 tracking-wide">
             <li class="min-w-max">

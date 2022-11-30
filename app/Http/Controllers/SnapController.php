@@ -65,15 +65,11 @@ class SnapController extends Controller
             Project::where('id', '=', $htrans->project_id)->update([
                 "status" => 1
             ]);
+            session(['tipeProjectSekarang' => 1]);
         }
 
         $htrans->status = $request->status;
         $htrans->transaction_method = $request->payment_type;
         $htrans->save();
-
-        if($request->status == 2){
-            Project::where('id', $htrans->project_id)
-            ->update(['status'=> 1]);
-        }
     }
 }
