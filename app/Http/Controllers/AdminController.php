@@ -4,18 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 use function PHPSTORM_META\type;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
     function Home(){
-        // $managers = DB::select('SELECT users.name, COUNT(*) FROM projects JOIN users ON users.id = projects.project_manager_id GROUP BY projects.project_manager_id, users.name');
-        // //dd($managers);
-
-        // $workers =DB::select('SELECT COUNT(user_id) FROM users_projects GROUP BY project_id');
-        // //dd($workers);
+        $projects_in_months = DB::select('SELECT COUNT(*) AS "count", MONTH(created_at) AS "month" FROM projects GROUP BY MONTH(created_at)');
+        $project_array = [];
+        for($i = 1; $i <= 12; $i++){
+            array_push($project_array, 0);
+        }
+        foreach($projects_in_months as $item){
+            $project_array[$item->month-1] = $item->count;
+        }
+        // dd(json_encode($project_array));
 
         $data = Project::all()->pluck('status')->toArray();
         // dd($data);
@@ -27,12 +32,19 @@ class AdminController extends Controller
             }
             else $unupgraded_counter++;
         }
-        return view('admin.admin', compact('upgraded_counter', 'unupgraded_counter'));
+        return view('admin.admin', compact('upgraded_counter', 'unupgraded_counter', 'project_array'));
     }
 
     function ProjectList(){
         $projects = Project::all();
 
         return view('admin.admin_projects', compact('projects'));
+    }
+
+    function AdminViewProject(Request $request ){
+        Session::put('projectSekarang', $request->id);
+        Session::put('tipeProjectSekarang', Project::find($request->id)->status);
+
+        return redirect()->route('project_home');
     }
 }
