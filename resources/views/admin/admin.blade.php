@@ -30,7 +30,7 @@
 
     const bar_chart = document.getElementById('projects_bar_chart')
     new Chart(bar_chart, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Septermber', 'October', 'November',  'December'],
             datasets: [{
