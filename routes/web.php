@@ -74,6 +74,11 @@ Route::prefix('project')->group(function () {
     Route::get('/upgrade', [ProjectController::class, 'IndexUpgrade'])->middleware('checkUserProjectRole:manager')->name('project_upgrade');
     Route::get('/ajax-snapToken',[SnapController::class, 'GetSnap'])->middleware('checkUserProjectRole:manager');
     Route::get('/ajax-update', [SnapController::class, 'Receive'])->middleware('checkUserProjectRole:manager');
+
+    //Member
+    Route::get('/member', [ProjectController::class, 'Member'])->name('project_daftar_member');
+    Route::get('/search-member', [ProjectController::class, 'SearchMember'])->name('project_search_member');
+    Route::post('/member',[ProjectController::class, 'AddMember']);
 });
 
 Route::prefix('file')->group(function () {

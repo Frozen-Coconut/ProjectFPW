@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
@@ -19,6 +22,86 @@ class ProjectController extends Controller
         Session::put('tipeProjectSekarang', Project::find($request->id)->status);
 
         return redirect()->route('project_home');
+    }
+
+    public function AddMember(Request $request)
+    {
+        $arr = $request->member;
+
+        $rules = [
+            'email' => 'required | email | exists:users',
+        ];
+
+        DB::beginTransaction();
+
+        foreach ($arr as $value) {
+            $data = [
+                'email' => $value
+            ];
+            $validator = Validator::make($data, $rules);
+            if ($validator->fails()) {
+                $failedRules = $validator->failed();
+                if(isset($failedRules['email']['email'])) {
+                    return response()->json(['error'=>'Email not valid!'], 400);
+                }else if(isset($failedRules['email']['exists'])) {
+                    return response()->json(['error'=>'Email not exist!'], 404);
+                }
+            }
+
+
+            $projects = User::where('email', '=', $value)->first()->projects();
+            $project_now = Session::get('projectSekarang');
+            $checked_user = User::where('email', '=', $value)->first();
+
+            if (!$projects->where('project_id', $project_now)->exists()) {
+                $checked_user->projects()->attach(0, [
+                    'user_id' => $checked_user->id,
+                    'project_id' => $project_now,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            } else {
+                DB::rollBack();
+                return response()->json(['error'=>'User sudah bergabung!'], 400);
+            }
+
+        }
+
+        DB::commit();
+        return response()->json(['message'=>'User berhasil ditambahkan!'], 200);
+    }
+
+    public function SearchMember(Request $request)
+    {
+        $query = $request->search;
+        if(!$query){
+            return null;
+        }
+
+        $user_outside_project = User::whereNotIn(
+            'id', Project::find(Session::get('projectSekarang'))->users()->pluck('users.id')
+        )->where(function($quer) use ($query){
+            $quer->where('email', 'like', '%'. $query.'%')
+            ->orWhere('name', 'like', '%'. $query.'%');
+        })
+        ->limit(3)
+        ->get();
+
+        if(count($user_outside_project) > 0){
+            return $user_outside_project;
+        }else{
+            return null;
+        }
+    }
+
+    public function Member(Request $request)
+    {
+        $project_member = Project::find(Session::get('projectSekarang'))->users()->get();
+        // dd($project_member);
+        $project = Project::find(session('projectSekarang'));
+        $user = getUser();
+
+        return view('project.daftar_member', compact('project_member', 'project', 'user'));
     }
 
     public function Project(Request $request)
