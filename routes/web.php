@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SnapController;
@@ -92,4 +93,9 @@ Route::prefix('file')->group(function () {
 Route::prefix('admin')->group(function (){
     Route::get('/', [AdminController::class, 'Home'])->name('admin_home');
     Route::get('/projects', [AdminController::class, 'ProjectList'])->name('admin_projects');
+});
+
+Route::prefix('mail')->group(function (){
+    Route::get('preview', [MailController::class, 'preview']);
+    Route::get('kirim', [MailController::class, 'kirim']);
 });

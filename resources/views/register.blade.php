@@ -8,8 +8,8 @@
     <div class="w-full bg-green-200 rounded">{{session('message_success')}}</div>
 @endif
 
-<div class="w-full place-content-center flex drop-shadow-sm">
-    <div class="w-6/12 flex-col mt-20">
+<div class="w-full place-content-center flex drop-shadow-sm  justify-center items-center h-screen">
+    <div class="w-6/12 flex-col">
         <form action="{{route('doRegister')}}" method="POST" class="border-solid border-gray-300 border rounded-lg p-10">
             <h1 class="text-xl pb-5">Register</h1>
             @csrf

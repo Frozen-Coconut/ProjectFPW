@@ -3,8 +3,8 @@
 @section('body')
 @include('util.message')
 
-<div class="w-full place-content-center flex drop-shadow-sm">
-    <div class="max-w-xs flex-col mt-20">
+<div class="w-full place-content-center flex drop-shadow-sm justify-center items-center h-screen">
+    <div class="max-w-xs flex-col">
         <form action="{{route('doLogin')}}" method="POST" class="border-solid border-gray-300 border rounded-lg p-10">
             <h1 class="text-xl pb-5">Login</h1>
             @csrf
