@@ -40,6 +40,7 @@ class ProjectController extends Controller
             ];
             $validator = Validator::make($data, $rules);
             if ($validator->fails()) {
+                DB::rollBack();
                 $failedRules = $validator->failed();
                 if(isset($failedRules['email']['email'])) {
                     return response()->json(['error'=>'Email not valid!'], 400);

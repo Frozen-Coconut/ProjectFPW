@@ -37,12 +37,12 @@ $('document').ready(function() {
             data: {
                 'member': getEmailsList()
             },
+            headers: {
+                Accept: "application/json",
+            },
         }).then( data => {
-            setTimeout(
-                function()
-                {
-                   location.reload();
-                }, 0001);
+            if(alert(data.message)){}
+            else window.location.reload();
         });
     });
 
