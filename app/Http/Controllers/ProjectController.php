@@ -20,6 +20,7 @@ class ProjectController extends Controller
     public function AddSession(Request $request) {
         Session::put('projectSekarang', $request->id);
         Session::put('tipeProjectSekarang', Project::find($request->id)->status);
+        
 
         return redirect()->route('project_home');
     }

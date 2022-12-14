@@ -12,7 +12,9 @@ class MailController extends Controller
         return new VerificationMail();
     }
 
-    function kirim(){
+    function kirim(Request $request){
+        
+
         Mail::to('liantoleonard9@gmail.com')->send(new VerificationMail);
     }
 }
