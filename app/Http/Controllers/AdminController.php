@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use function PHPSTORM_META\type;
 
@@ -32,7 +33,18 @@ class AdminController extends Controller
             }
             else $unupgraded_counter++;
         }
-        return view('admin.admin', compact('upgraded_counter', 'unupgraded_counter', 'project_array'));
+        $upgraded_percentage = round($upgraded_counter/($upgraded_counter+$unupgraded_counter)*100, 2);
+        $unupgraded_percentage = 100-$upgraded_percentage;
+
+        $pekerjaan_data = [
+            User::where('occupational_status', 0)->count(),
+            User::where('occupational_status', 1)->count(),
+            User::where('occupational_status', 2)->count(),
+            User::where('occupational_status', 3)->count()
+        ];
+
+
+        return view('admin.admin', compact('upgraded_percentage', 'unupgraded_percentage', 'upgraded_counter', 'project_array', 'pekerjaan_data'));
     }
 
     function ProjectList(){
