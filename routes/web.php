@@ -93,9 +93,12 @@ Route::prefix('file')->group(function () {
 Route::prefix('admin')->group(function (){
     Route::get('/', [AdminController::class, 'Home'])->name('admin_home');
     Route::get('/projects', [AdminController::class, 'ProjectList'])->name('admin_projects');
+    Route::get('/project-detail', [AdminController::class, 'AdminViewProjectDetail'])->name('admin_project_detail');
 });
 
 Route::prefix('mail')->group(function (){
     Route::get('preview', [MailController::class, 'preview']);
-    Route::get('kirim', [MailController::class, 'kirim']);
+    Route::get('kirim', [MailController::class, 'kirim'])->name('kirim_email');
+    Route::get('/verifikasi', [AuthController::class, 'viewVerifikasi'])->name('view_verifikasi');
+    Route::post('/verifikasi', [AuthController::class, 'doVerifikasi'])->name('do_verifikasi');
 });

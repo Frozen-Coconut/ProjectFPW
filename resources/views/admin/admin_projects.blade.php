@@ -17,7 +17,7 @@
             <div class="bg-green-600 text-xs font-medium text-gray-500 text-center leading-8 rounded-l-full h-10" style="width: {{$project->percent_completed()}}%"></div>
             <p class="absolute inline-block text-xs font-medium text-gray-900 z-5 text-center" style="top:50%;right:50%;transform:translate(50%,-50%)">{{$project->percent_completed()}}%</p>
           </div>
-          <a href="{{route('admin_project', [
+          <a href="{{route('admin_project_detail', [
             'id' => $project->id
           ])}}" class="mt-3 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Detail</a>
         </div>

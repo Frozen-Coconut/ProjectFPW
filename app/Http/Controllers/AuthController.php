@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -31,7 +33,15 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($credential)) {
+
+            if (getUser()->email_verified_at == null) {
+                return redirect()->route('view_verifikasi', [
+                    "email" => $request->email
+                ]);
+            }
+
             return redirect()->route('user_home');
+
         } else {
             return redirect()->route('login')->with('message_error', 'Password salah!');
         }
@@ -58,11 +68,26 @@ class AuthController extends Controller
             "occupational_status" => $request->occupational_status
         ]);
 
-        return redirect()->route('login');
+        return redirect()->route('kirim_email', [
+            "email" => $request->email
+        ]);
     }
 
     public function doLogout(Request $request) {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    public function viewVerifikasi(Request $request) {
+        return view('verification', [
+            "email" => $request->email
+        ]);
+    }
+
+    public function doVerifikasi(Request $request) {
+        if ($request->kode_verif == Hash::md5($request->email)) {
+            $user = User::where('email','=', $request->email);
+            $user->email_verified_at = Carbon::now();
+        }
     }
 }

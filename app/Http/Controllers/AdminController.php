@@ -47,4 +47,12 @@ class AdminController extends Controller
 
         return redirect()->route('project_home');
     }
+
+    function AdminViewProjectDetail(Request $request) {
+        $project = Project::where('id','=',$request->id)->first();
+
+        return view('admin.admin_project_detail',[
+            "project" => $project
+        ]);
+    }
 }

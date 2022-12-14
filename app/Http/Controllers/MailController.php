@@ -13,8 +13,10 @@ class MailController extends Controller
     }
 
     function kirim(Request $request){
-        
+        Mail::to($request->email)->send(new VerificationMail);
 
-        Mail::to('liantoleonard9@gmail.com')->send(new VerificationMail);
+        return redirect()->route('view_verifikasi', [
+            "email" => $request->email
+        ]);
     }
 }
