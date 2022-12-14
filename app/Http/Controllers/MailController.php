@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\VerificationMail;
 use Illuminate\Http\Request;
+use App\Mail\VerificationMail;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
@@ -13,7 +15,8 @@ class MailController extends Controller
     }
 
     function kirim(Request $request){
-        Mail::to($request->email)->send(new VerificationMail);
+
+        Mail::to($request->email)->send(new VerificationMail(md5($request->email)));
 
         return redirect()->route('view_verifikasi', [
             "email" => $request->email

@@ -20,9 +20,13 @@ class VerificationMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    public $kode = "";
+
+    public function __construct($kode_temp)
     {
         //
+        $this->kode = $kode_temp;
     }
 
     /**
@@ -49,7 +53,7 @@ class VerificationMail extends Mailable
             view: 'emails.verification',
             with: [
                 //ini buat masukin var ke view
-                'param' => '$param'
+                'kode' => $this->kode
             ]
         );
     }

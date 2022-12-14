@@ -7,9 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <h1>halo lele</h1>
-        <a href="{{route('admin_home')}}">ini link tolong di klik</a>
+    <div style="display: flex;flex-direction:row;justify-content:center;align-items:center">
+        <h1>Berikut ini kode verifikasinya </h1>
+        <h4>Kode : {{$kode}}</h4>
     </div>
 </body>
 </html>

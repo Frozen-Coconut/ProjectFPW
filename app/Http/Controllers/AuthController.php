@@ -85,11 +85,24 @@ class AuthController extends Controller
     }
 
     public function doVerifikasi(Request $request) {
+        $request->validate([
+            "kode_verif" => 'required'
+        ],[
+            '*.required' => ':attribute harus diisi!',
+        ],[
+            'kode_verif' => 'Kode Verifikasi'
+        ]);
+
         if ($request->kode_verif == md5($request->email)) {
             $user = User::where('email','=', $request->email);
             $user->email_verified_at = Carbon::now();
 
-            return redirect()->route('login');
+            if (!getUser()) {
+                return redirect()->route('login');
+            }
+            else {
+                return redirect()->route('user_home');
+            }
         }
         else {
             return redirect()->route('view_verifikasi', [

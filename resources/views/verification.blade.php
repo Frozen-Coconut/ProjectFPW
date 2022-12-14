@@ -18,12 +18,18 @@
             Kode Verifikasi
           </label>
           <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kode_verif" type="text" placeholder="Kode Verifikasi">
-          <div>
-            <a class="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800 mt-7" href="{{route('kirim_email', [
+          @error('kode_verif')
+                <p class="text-red-500">{{$message}}</p>
+          @enderror
+          <div class="flex items-center justify-between mt-3">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" name="login">
+              Verifikasi
+              <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{{route('kirim_email', [
                 "email" => $email
             ])}}">
-                Kirim ulang email verifikasi !
-              </a>
+            </button>
+              Kirim ulang email verifikasi !
+            </a>
           </div>
         </form>
     </div>
