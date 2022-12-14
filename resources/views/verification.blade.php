@@ -18,6 +18,13 @@
             Kode Verifikasi
           </label>
           <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kode_verif" type="text" placeholder="Kode Verifikasi">
+          <div>
+            <a class="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800 mt-7" href="{{route('kirim_email', [
+                "email" => $email
+            ])}}">
+                Kirim ulang email verifikasi !
+              </a>
+          </div>
         </form>
     </div>
 </div>
