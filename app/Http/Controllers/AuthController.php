@@ -94,8 +94,9 @@ class AuthController extends Controller
         ]);
 
         if ($request->kode_verif == md5($request->email)) {
-            $user = User::where('email','=', $request->email);
+            $user = User::where('email','=', $request->email)->first();
             $user->email_verified_at = Carbon::now();
+            $user->save();
 
             if (!getUser()) {
                 return redirect()->route('login');

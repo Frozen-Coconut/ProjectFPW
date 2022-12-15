@@ -21,7 +21,8 @@
           @error('kode_verif')
                 <p class="text-red-500">{{$message}}</p>
           @enderror
-          <div class="flex items-center justify-between mt-3">
+          <div class="mt-3 flex items-center justify-between mt-3serve
+          ">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" name="login">
               Verifikasi
               <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{{route('kirim_email', [
