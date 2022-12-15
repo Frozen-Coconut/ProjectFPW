@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             User::create([
                 'name' => "User $i",
                 'email' => "user$i@example.com",
+                'email_verified_at' => now(),
                 'password' => bcrypt("user$i"),
                 'occupational_status' => random_int(0, 3)
             ]);
