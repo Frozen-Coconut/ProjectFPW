@@ -67,4 +67,9 @@ class AdminController extends Controller
             "project" => $project
         ]);
     }
+
+    function GetMasterView(){
+        $users = User::all();
+        return view('admin.admin_master', compact('users'));
+    }
 }

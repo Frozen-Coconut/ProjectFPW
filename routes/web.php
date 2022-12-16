@@ -94,6 +94,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/', [AdminController::class, 'Home'])->name('admin_home');
     Route::get('/projects', [AdminController::class, 'ProjectList'])->name('admin_projects');
     Route::get('/project-detail', [AdminController::class, 'AdminViewProjectDetail'])->name('admin_project_detail');
+    Route::get('/master', [AdminController::class, 'GetMasterView'])->name('master_view');
 });
 
 Route::prefix('mail')->group(function (){
