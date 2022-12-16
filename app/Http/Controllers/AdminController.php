@@ -72,4 +72,12 @@ class AdminController extends Controller
         $users = User::all();
         return view('admin.admin_master', compact('users'));
     }
+
+    function DeleteUser(Request $request){
+        $id = $request->id;
+        User::where('id', $id)->delete();
+        return back();
+    }
+
+
 }

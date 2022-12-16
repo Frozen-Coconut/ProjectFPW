@@ -17,7 +17,11 @@
         <td>{{$user->role}}</td>
         <td>
           <button>Edit</button>
-          <button>Delete</button>
+          <form action="" method="POST">
+            @csrf
+            <input type="hidden" value="{{$user->id}}" name="id">
+            <button type="submit">Delete</button>
+          </form>
         </td>
       </tr>
     @endforeach

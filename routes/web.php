@@ -95,6 +95,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/projects', [AdminController::class, 'ProjectList'])->name('admin_projects');
     Route::get('/project-detail', [AdminController::class, 'AdminViewProjectDetail'])->name('admin_project_detail');
     Route::get('/master', [AdminController::class, 'GetMasterView'])->name('master_view');
+    Route::post('/master', [AdminController::class, 'DeleteUser']);
 });
 
 Route::prefix('mail')->group(function (){
