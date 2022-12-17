@@ -2,21 +2,26 @@
 
 @section('content')
 
-<div style="">
-    <div class="w-3/12 float-left">
-        <canvas id="upgraded_projects_chart"></canvas>
+<div class="flex flex-col justify-center items-center w-full">
+    <div class="flex flex-row w-8/12">
+        <div class="w-1/2">
+            <canvas id="upgraded_projects_chart"></canvas>
+        </div>
+        <div class="w-1/2">
+            <canvas id="chart_pekerjaan"></canvas>
+        </div>
     </div>
-    <div class="w-6/12 float-left">
-        <canvas id="projects_bar_chart"></canvas>
-    </div>
-    <div class="w-3/12 float-left">
-        <canvas id="chart_pekerjaan"></canvas>
+    <div class="flex flex-row">
+        <div class="">
+            <canvas id="projects_bar_chart"></canvas>
+        </div>
+        <div>
+            <p class="text-xl text-center">Projects Upgraded</p>
+            <p class="text-8xl text-center">{{$upgraded_counter}}</p>
+        </div>
     </div>
 </div>
-<div>
-    <p class="text-xl text-center">Projects Upgraded</p>
-    <p class="text-8xl text-center">{{$upgraded_counter}}</p>
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('upgraded_projects_chart')

@@ -28,6 +28,8 @@ Route::prefix('/')->middleware('loginregister')->group(function () {
     Route::post('/register', [AuthController::class, 'doRegister'])->name('doRegister');
 });
 
+Route::get('/banned', [AuthController::class, 'banned'])->name('banned');
+
 Route::get('/logout', [AuthController::class, 'doLogout'])->name('logout');
 
 Route::prefix('user')->middleware('user')->group(function () {
@@ -97,6 +99,8 @@ Route::prefix('admin')->middleware('admin')->group(function (){
     Route::get('/project-detail', [AdminController::class, 'AdminViewProjectDetail'])->name('admin_project_detail');
     Route::get('/master', [AdminController::class, 'GetMasterView'])->name('master_view');
     Route::post('/master', [AdminController::class, 'DeleteUser']);
+    Route::get('/adduser', [AdminController::class, 'GetAddUserView'])->name('add_user');
+    Route::post('/adduser', [AdminController::class, 'AddUser'])->name('do_add_user');
 });
 
 Route::prefix('mail')->middleware('emailverification')->group(function (){

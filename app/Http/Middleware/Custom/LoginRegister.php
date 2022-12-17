@@ -27,7 +27,10 @@ class LoginRegister
                         "email" => $user->email
                     ]);
                 }
-                return redirect()->route('user_home');
+                if ($user->banned == 1){
+                    return redirect()->route('banned');;
+                }
+                return redirect()->route('login');
             }
         }
         return $next($request);

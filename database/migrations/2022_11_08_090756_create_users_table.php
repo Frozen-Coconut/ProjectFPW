@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password', 256);
             $table->integer('occupational_status')->default(0)->comment('0 = pelajar, 1 = mahasiswa, 2 = pekerja, 3 = yang lainnya');
             $table->integer('role')->default(0)->comment('0 = user, 1 = admin');
+            $table->integer('banned')->default(0);
         });
     }
 

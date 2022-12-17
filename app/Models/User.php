@@ -20,7 +20,8 @@ class User extends Authenticatable
         "email_verified_at",
         "password",
         "occupational_status",
-        "role"
+        "role",
+        "banned"
     ];
 
     public function to_dos() {
