@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $n = 10;
 
         // users
-        for ($i = 1; $i <= $n; $i++) {
+        for ($i = 2; $i <= $n + 1; $i++) {
             User::create([
                 'name' => "User $i",
                 'email' => "user$i@example.com",
