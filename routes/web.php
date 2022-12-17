@@ -28,6 +28,8 @@ Route::prefix('/')->middleware('loginregister')->group(function () {
     Route::post('/register', [AuthController::class, 'doRegister'])->name('doRegister');
 });
 
+Route::get('/banned', [AuthController::class, 'banned'])->name('banned');
+
 Route::get('/logout', [AuthController::class, 'doLogout'])->name('logout');
 
 Route::prefix('user')->middleware('user')->group(function () {

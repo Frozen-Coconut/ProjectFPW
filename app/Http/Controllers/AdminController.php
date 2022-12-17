@@ -75,7 +75,14 @@ class AdminController extends Controller
 
     function DeleteUser(Request $request){
         $id = $request->id;
-        User::where('id', $id)->delete();
+        if (User::find($id)->banned == 0){
+            User::where('id', $id)->update(['banned' => 1]);
+        }
+        else{
+            User::where('id', $id)->update(['banned' => 0]);
+        }
+
+
         return back();
     }
 
@@ -89,15 +96,13 @@ class AdminController extends Controller
             "name" => 'required',
             "password" => 'required|confirmed',
             "password_confirmation" => 'required',
-            "occupational_status" => 'required',
-            "role"=>'required'
         ]);
         User::create([
             "email" => $request->email,
             "name" => $request->name,
             "password" => bcrypt($request->password),
-            "occupational_status" => $request->occupational_status,
-            "role"=> $request->role,
+            "occupational_status" => 2,
+            "role"=> 1,
             "email_verified_at" => now()
         ]);
 

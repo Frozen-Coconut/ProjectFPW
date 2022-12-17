@@ -48,28 +48,6 @@
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
               </div>
-              <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="occupational_status">Pekerjaan</label><br>
-                <select name="occupational_status" id="occupational_status" class="shadow border rounded w-full py-2 px-3 text-gray-700 bg-white leading-tight">
-                    <option value="0" {{old('occupational_status') == '0' ? 'selected' : ''}}>Pelajar</option>
-                    <option value="1" {{old('occupational_status') == '1' ? 'selected' : ''}}>Mahasiswa</option>
-                    <option value="2" {{old('occupational_status') == '2' ? 'selected' : ''}}>Pekerja</option>
-                    <option value="3" {{old('occupational_status') == '3' ? 'selected' : ''}}>Yang lainnya</option>
-                </select><br>
-                @error('occupational_status')
-                    <p class="text-red-500">{{$message}}</p>
-                @enderror
-              </div>
-              <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="role">Role</label><br>
-                <select name="role" id="role" class="shadow border rounded w-full py-2 px-3 text-gray-700 bg-white leading-tight">
-                    <option value="0" {{old('role') == '0' ? 'selected' : ''}}>User</option>
-                    <option value="1" {{old('role') == '1' ? 'selected' : ''}}>Admin</option>
-                </select><br>
-                @error('role')
-                    <p class="text-red-500">{{$message}}</p>
-                @enderror
-              </div>
               <div class="flex items-center justify-between">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" name="register">
                   Tambah User

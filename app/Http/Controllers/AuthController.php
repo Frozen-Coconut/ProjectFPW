@@ -110,4 +110,8 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    function banned(){
+        return view('banned');
+    }
 }
