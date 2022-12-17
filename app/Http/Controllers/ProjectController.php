@@ -20,7 +20,7 @@ class ProjectController extends Controller
     public function AddSession(Request $request) {
         Session::put('projectSekarang', $request->id);
         Session::put('tipeProjectSekarang', Project::find($request->id)->status);
-        
+
 
         return redirect()->route('project_home');
     }
@@ -225,7 +225,8 @@ class ProjectController extends Controller
                     $daftar_tugas = $daftar_tugas->orderBy('deadline','ASC');
                 case(4):
                     if ($request->pm == 0) {
-                        //Kosongin
+                        // //Kosongin
+                        // var_dump('halo');
                     }
                     else {
                         $daftar_tugas = $daftar_tugas->orderBy('pivot_weights','ASC');
@@ -250,13 +251,14 @@ class ProjectController extends Controller
         $user = getUser();
 
         foreach ($user->to_dos()->where('project_id','=',Session::get('projectSekarang'))->get() as $key => $value) {
-            $key = array_search($value->id,$request->id);
-            if($key == false) {
+            $keyTemp = array_search($value->id,$request->id);
+
+            if($keyTemp == "") {
                 $value->pivot->weights = count($request->id) + 1;
                 $value->pivot->save();
             }
             else {
-                $value->pivot->weights = $request->value[$key];
+                $value->pivot->weights = $request->value[$keyTemp];
                 $value->pivot->save();
             }
         }
@@ -267,8 +269,14 @@ class ProjectController extends Controller
 
         foreach($to_do->users as $user) {
             if ($user->pivot->status == 1) {
-                $notifikasiAmbil = Notification::where('project_id','=',$to_do->project_id)->where('user_id','=',$user->id)->first();
-                if ($notifikasiAmbil == null || $notifikasiAmbil->status == 3) {
+                $notifikasiAmbil = Notification::where('project_id','=',$to_do->project_id)->where('user_id','=',$user->id)->get();
+                $cekAda = 0;
+
+                foreach ($notifikasiAmbil as $key => $value) {
+                    if ($value->status <= 2) $cekAda = 1;
+                }
+
+                if ($cekAda == 0) {
                     Notification::create([
                         "content" => 'Cepat kerjakan to do '.$to_do->name,
                         "status" => 1,
@@ -276,6 +284,7 @@ class ProjectController extends Controller
                         "project_id" => $to_do->project_id
                     ]);
                 }
+
             }
         }
     }

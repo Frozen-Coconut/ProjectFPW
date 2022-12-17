@@ -79,10 +79,12 @@ function hilangkanIsiArray(id) {
     idsTemp = [];
     valuesTemp = [];
     index = -1;
+    maximum = 1;
     for (var i = 0; i< ids.length ; i+=1) {
         if (ids[i] != id) {
             idsTemp.push(ids[i]);
             valuesTemp.push(values[i]);
+
         }
         else index = i;
     }
@@ -92,9 +94,11 @@ function hilangkanIsiArray(id) {
     for (var i = index; i< idsTemp.length; i+= 1) {
         valuesTemp[i] =  parseInt(valuesTemp[i])-1;
         $("#"+idsTemp[i]).html(valuesTemp[i]);
+
+        if (valuesTemp[i] > maximum) maximum = values[i];
     }
 
-    counter = valuesTemp[idsTemp.length-1];
+    counter = maximum+1;
 
     ids = idsTemp;
     values = valuesTemp;
