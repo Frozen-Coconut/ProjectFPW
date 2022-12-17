@@ -26,6 +26,16 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        // admin
+        User::create([
+            'name' => "Administrator",
+            'email' => "administrator@example.com",
+            'email_verified_at' => now(),
+            'password' => bcrypt("rotartsinimda"),
+            'occupational_status' => 3,
+            'role' => 1
+        ]);
+
         // how many?
         $n = 10;
 
@@ -36,7 +46,8 @@ class DatabaseSeeder extends Seeder
                 'email' => "user$i@example.com",
                 'email_verified_at' => now(),
                 'password' => bcrypt("user$i"),
-                'occupational_status' => random_int(0, 3)
+                'occupational_status' => random_int(0, 3),
+                'role' => 0
             ]);
         }
 

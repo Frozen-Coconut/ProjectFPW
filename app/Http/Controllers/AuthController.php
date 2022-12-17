@@ -18,10 +18,6 @@ class AuthController extends Controller
 
     public function doLogin(Request $request)
     {
-        //untuk sementara
-        if ($request->email == "admin" && $request->password == "admin"){
-            return redirect()->route('admin_home');
-        }
         $request->validate([
             "email" => 'required|email|exists:users,email',
             "password" => 'required'
@@ -33,6 +29,9 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($credential)) {
+            if (getUser()->role == 1) {
+                return redirect()->route('admin_home');
+            }
 
             if (getUser()->email_verified_at == null) {
                 return redirect()->route('view_verifikasi', [
