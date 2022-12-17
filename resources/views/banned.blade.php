@@ -9,6 +9,6 @@
 <body>
   <h1>You are banned</h1>
   km jahat ya :)
-  <button onclick="{{route('login')}}">Back to login</button>
+  <a href="{{route('logout')}}"><button>Back to login</button></a>
 </body>
 </html>
