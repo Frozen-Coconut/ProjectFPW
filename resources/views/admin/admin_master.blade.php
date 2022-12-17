@@ -1,12 +1,12 @@
 @extends('admin.layouts.layout_main')
 @section('content')
-<div>
+
   <div>
      <a href="{{route('add_user')}}"><button class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
         Tambah User
     </button></a>
   </div>
-  <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+
     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
       <div class="overflow-hidden">
         <table class="min-w-full">
@@ -54,5 +54,5 @@
         </table>
       </div>
     </div>
-  </div>
-</div>
+
+
