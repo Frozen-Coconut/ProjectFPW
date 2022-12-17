@@ -97,6 +97,8 @@ Route::prefix('admin')->middleware('admin')->group(function (){
     Route::get('/project-detail', [AdminController::class, 'AdminViewProjectDetail'])->name('admin_project_detail');
     Route::get('/master', [AdminController::class, 'GetMasterView'])->name('master_view');
     Route::post('/master', [AdminController::class, 'DeleteUser']);
+    Route::get('/adduser', [AdminController::class, 'GetAddUserView'])->name('add_user');
+    Route::post('/adduser', [AdminController::class, 'AddUser'])->name('do_add_user');
 });
 
 Route::prefix('mail')->middleware('emailverification')->group(function (){

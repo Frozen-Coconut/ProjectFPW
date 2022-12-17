@@ -32,6 +32,20 @@
               <span class="group-hover:text-gray-700">Daftar Project</span>
             </a>
           </li>
+          <li class="min-w-max">
+            @if (route('master_view') == url()->current())
+          <a href="{{route('master_view')}}" aria-label="dashboard" class="relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white">
+            @else
+          <a href="{{route('master_view')}}" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">
+            @endif
+            <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
+              <path d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z" class="fill-current text-cyan-400 dark:fill-slate-600"></path>
+              <path d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z" class="fill-current text-cyan-200 group-hover:text-cyan-300"></path>
+              <path d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z" class="fill-current group-hover:text-sky-300"></path>
+            </svg>
+            <span class="-mr-1 font-medium">Master</span>
+          </a>
+        </li>
         </ul>
       </div>
       <div class="w-max -mb-3">

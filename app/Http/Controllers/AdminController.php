@@ -79,5 +79,28 @@ class AdminController extends Controller
         return back();
     }
 
+    function GetAddUserView(){
+        return view('admin.add_user');
+    }
 
+    function AddUser(Request $request){
+        $request->validate([
+            "email" => 'required|email|unique:users,email',
+            "name" => 'required',
+            "password" => 'required|confirmed',
+            "password_confirmation" => 'required',
+            "occupational_status" => 'required',
+            "role"=>'required'
+        ]);
+        User::create([
+            "email" => $request->email,
+            "name" => $request->name,
+            "password" => bcrypt($request->password),
+            "occupational_status" => $request->occupational_status,
+            "role"=> $request->role,
+            "email_verified_at" => now()
+        ]);
+
+        return redirect()->route('add_user');
+    }
 }
