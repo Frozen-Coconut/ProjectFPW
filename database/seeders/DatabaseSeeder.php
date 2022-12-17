@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $n = 10;
 
         // users
-        for ($i = 2; $i <= $n + 1; $i++) {
+        for ($i = 1; $i <= $n; $i++) {
             User::create([
                 'name' => "User $i",
                 'email' => "user$i@example.com",
@@ -56,20 +56,20 @@ class DatabaseSeeder extends Seeder
             Project::create([
                 'name_project' => "Project $i",
                 'invitation_code' => "project$i",
-                'project_manager_id' => $i
+                'project_manager_id' => $i + 1
             ]);
         }
 
         // users_projects
         for ($i = 1; $i <= $n; $i++) {
             User::find($i)->projects()->attach(0, [
-                'user_id' => $i,
+                'user_id' => $i + 1,
                 'project_id' => $i,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
             User::find($i)->projects()->attach(0, [
-                'user_id' => $i,
+                'user_id' => $i + 1,
                 'project_id' => $n + 1 - $i,
                 'created_at' => now(),
                 'updated_at' => now()
