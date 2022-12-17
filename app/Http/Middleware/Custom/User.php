@@ -20,14 +20,19 @@ class User
         if ($user == false) {
             return redirect()->route('login');
         }
-        if ($user->role == 1) {
-            return redirect()->route('admin_home');
+        else if ($user->banned == 1) {
+            return redirect()->route('banned');
         }
-        if ($user->role == 0) {
-            if ($user->email_verified_at == null) {
-                return redirect()->route('view_verifikasi', [
-                    "email" => $user->email
-                ]);
+        else {
+            if ($user->role == 1) {
+                return redirect()->route('admin_home');
+            }
+            if ($user->role == 0) {
+                if ($user->email_verified_at == null) {
+                    return redirect()->route('view_verifikasi', [
+                        "email" => $user->email
+                    ]);
+                }
             }
         }
         return $next($request);
