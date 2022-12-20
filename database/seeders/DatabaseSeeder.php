@@ -35,6 +35,14 @@ class DatabaseSeeder extends Seeder
             'occupational_status' => 3,
             'role' => 1
         ]);
+        User::create([
+            'name' => "Another Administrator",
+            'email' => "anotheradministrator@example.com",
+            'email_verified_at' => now(),
+            'password' => bcrypt("rotartsinimdarehtona"),
+            'occupational_status' => 3,
+            'role' => 1
+        ]);
 
         // how many?
         $n = 10;
@@ -56,47 +64,23 @@ class DatabaseSeeder extends Seeder
             Project::create([
                 'name_project' => "Project $i",
                 'invitation_code' => "project$i",
-                'project_manager_id' => $i + 1
+                'project_manager_id' => $i + 2
             ]);
         }
 
         // users_projects
         for ($i = 1; $i <= $n; $i++) {
             User::find($i)->projects()->attach(0, [
-                'user_id' => $i + 1,
+                'user_id' => $i + 2,
                 'project_id' => $i,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
             User::find($i)->projects()->attach(0, [
-                'user_id' => $i + 1,
+                'user_id' => $i + 2,
                 'project_id' => $n + 1 - $i,
                 'created_at' => now(),
                 'updated_at' => now()
-            ]);
-        }
-
-        for ($i = 1; $i <= $n; $i++) {
-            for ($j = 1; $j <= 5; $j++) {
-                ToDo::create([
-                    'name' => "To Do $j",
-                    'project_id' => $i,
-                    'deadline' => date_add(now(), date_interval_create_from_date_string("7 days"))
-                ]);
-            }
-        }
-
-        // posts
-        for ($i = 1; $i <= $n; $i++) {
-            Post::create([
-                'project_id' => $i,
-                'user_id' => $i,
-                'contents' => "Ini post dari User $i"
-            ]);
-            Post::create([
-                'project_id' => $i,
-                'user_id' => $n + 1 - $i,
-                'contents' => 'Ini post dari User ' . ($n + 1 - $i)
             ]);
         }
     }
