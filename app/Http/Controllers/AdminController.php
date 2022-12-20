@@ -23,7 +23,7 @@ class AdminController extends Controller
             array_push($project_array, 0);
         }
         foreach($projects_in_months as $item){
-            $project_array[$item->month-1] = $item->count;
+            $project_array[$item->month-1] = intval($item->count);
         }
         // dd(json_encode($project_array));
 
@@ -33,9 +33,9 @@ class AdminController extends Controller
         $unupgraded_counter = 0;
         foreach($data as $item){
             if($item == 0) {
-                $upgraded_counter++;
+                $unupgraded_counter++;
             }
-            else $unupgraded_counter++;
+            else $upgraded_counter++;
         }
 	if ($upgraded_counter+$unupgraded_counter != 0){
         	$upgraded_percentage = round($upgraded_counter/($upgraded_counter+$unupgraded_counter)*100, 2);
