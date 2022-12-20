@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout_main')
 
 @section('content')
-
+@if ($jumlah_project != 0)
 <div class="flex flex-col justify-center items-center w-full">
     <div class="flex flex-row w-8/12">
         <div class="w-1/2">
@@ -67,6 +67,8 @@
     });
 
 </script>
-
+@else
+<p class="text-2xl m-12">Belum ada project</p>
+@endif
 @endsection
 

@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Session;
 class AdminController extends Controller
 {
     function Home(){
+        $jumlah_project = Project::count();
+	if ($jumlah_project == 0) {
+		return view('admin.admin', compact('jumlah_project'));
+	}
         $projects_in_months = DB::select('SELECT COUNT(*) AS "count", MONTH(created_at) AS "month" FROM projects GROUP BY MONTH(created_at)');
         $project_array = [];
         for($i = 1; $i <= 12; $i++){
@@ -33,8 +37,10 @@ class AdminController extends Controller
             }
             else $unupgraded_counter++;
         }
-        $upgraded_percentage = round($upgraded_counter/($upgraded_counter+$unupgraded_counter)*100, 2);
-        $unupgraded_percentage = 100-$upgraded_percentage;
+	if ($upgraded_counter+$unupgraded_counter != 0){
+        	$upgraded_percentage = round($upgraded_counter/($upgraded_counter+$unupgraded_counter)*100, 2);
+        } else $upgraded_percentage = 0;
+	$unupgraded_percentage = 100-$upgraded_percentage;
 
         $pekerjaan_data = [
             User::where('occupational_status', 0)->count(),
