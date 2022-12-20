@@ -50,7 +50,7 @@ class AdminController extends Controller
         ];
 
 
-        return view('admin.admin', compact('upgraded_percentage', 'unupgraded_percentage', 'upgraded_counter', 'project_array', 'pekerjaan_data'));
+        return view('admin.admin', compact('jumlah_project', 'upgraded_percentage', 'unupgraded_percentage', 'upgraded_counter', 'project_array', 'pekerjaan_data'));
     }
 
     function ProjectList(){
