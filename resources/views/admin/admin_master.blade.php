@@ -1,15 +1,18 @@
 @extends('admin.layouts.layout_main')
 @section('content')
+<form action="" method="GET">
   <div class="flex flex-row">
     <div class="mb-4 mx-10 my-6 w-10/12">
       <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="search" value="{{old('search')}}" type="text" placeholder="Search Name">
     </div>
     <div class="mb-4 my-6">
-      <button class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-3 py-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+      <button class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-3 py-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline" type="submit">
         Search
       </button>
     </div>
   </div>
+</form>
+
   <div class="float-right">
     <a href="{{route('add_user')}}"><button class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
        Tambah User

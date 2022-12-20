@@ -68,8 +68,15 @@ class AdminController extends Controller
         ]);
     }
 
-    function GetMasterView(){
-        $users = User::all();
+    function GetMasterView(Request $request){
+        $search = $request->search;
+        if ($search == null){
+            $users = User::all();
+            dd($users);
+        }
+        else{
+            $users = User::where('name', 'LIKE', '%'.$search.'%')->get();
+        }
         return view('admin.admin_master', compact('users'));
     }
 
