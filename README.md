@@ -22,10 +22,10 @@ MAIL_MAILER=smtp
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
-MAIL_USERNAME=
-MAIL_PASSWORD=
+MAIL_USERNAME=project.manager.fpw.01@gmail.com
+MAIL_PASSWORD=hmmsziunhhdjeulg
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=liantoleonard703@gmail.com
+MAIL_FROM_ADDRESS=project.manager.fpw.01@gmail.com
 MAIL_FROM_NAME="${APP_NAME}"
 
 MIDTRANS_IS_PRODUCTION=false
