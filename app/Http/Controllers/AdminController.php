@@ -13,13 +13,17 @@ use Illuminate\Support\Facades\Session;
 class AdminController extends Controller
 {
     function Home(){
+        $jumlah_project = Project::count();
+	if ($jumlah_project == 0) {
+		return view('admin.admin', compact('jumlah_project'));
+	}
         $projects_in_months = DB::select('SELECT COUNT(*) AS "count", MONTH(created_at) AS "month" FROM projects GROUP BY MONTH(created_at)');
         $project_array = [];
         for($i = 1; $i <= 12; $i++){
             array_push($project_array, 0);
         }
         foreach($projects_in_months as $item){
-            $project_array[$item->month-1] = $item->count;
+            $project_array[$item->month-1] = intval($item->count);
         }
         // dd(json_encode($project_array));
 
@@ -29,12 +33,14 @@ class AdminController extends Controller
         $unupgraded_counter = 0;
         foreach($data as $item){
             if($item == 0) {
-                $upgraded_counter++;
+                $unupgraded_counter++;
             }
-            else $unupgraded_counter++;
+            else $upgraded_counter++;
         }
-        $upgraded_percentage = round($upgraded_counter/($upgraded_counter+$unupgraded_counter)*100, 2);
-        $unupgraded_percentage = 100-$upgraded_percentage;
+	if ($upgraded_counter+$unupgraded_counter != 0){
+        	$upgraded_percentage = round($upgraded_counter/($upgraded_counter+$unupgraded_counter)*100, 2);
+        } else $upgraded_percentage = 0;
+	$unupgraded_percentage = 100-$upgraded_percentage;
 
         $pekerjaan_data = [
             User::where('occupational_status', 0)->count(),
@@ -44,7 +50,7 @@ class AdminController extends Controller
         ];
 
 
-        return view('admin.admin', compact('upgraded_percentage', 'unupgraded_percentage', 'upgraded_counter', 'project_array', 'pekerjaan_data'));
+        return view('admin.admin', compact('jumlah_project', 'upgraded_percentage', 'unupgraded_percentage', 'upgraded_counter', 'project_array', 'pekerjaan_data'));
     }
 
     function ProjectList(){
