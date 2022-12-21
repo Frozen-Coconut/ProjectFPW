@@ -78,7 +78,7 @@ class AdminController extends Controller
         $search = $request->search;
         if ($search == null){
             $users = User::all();
-            dd($users);
+            // dd($users);
         }
         else{
             $users = User::where('name', 'LIKE', '%'.$search.'%')->get();
